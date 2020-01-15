@@ -1,23 +1,17 @@
+import { ThemeProvider } from "@material-ui/styles";
 import React from "react";
 import "./App.css";
+import theme from "./theme";
+import { Router, Link } from "@reach/router";
 
-const App: React.FC = () => {
+const App: React.FC<any> = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Home path="/" />
+        <Dash path="dashboard" />
+      </Router>
+    </ThemeProvider>
   );
 };
 
