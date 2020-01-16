@@ -1,9 +1,30 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
+import clsx from 'clsx';
+import React from 'react';
+import { ITheme } from '../../theme';
 
-const useStyles = makeStyles(theme => ({
+interface IProps {
+  className?: string;
+  color: StatusBulletColor;
+  size: StatusBulletSize;
+}
+
+export enum StatusBulletColor {
+  NEUTRAL = 'neutral',
+  PRIMARY = 'primary',
+  INFO = 'info',
+  SUCCESS = 'success',
+  WARNING = 'warning',
+  DANGER = 'danger'
+}
+
+export enum StatusBulletSize {
+  SMALL = 'sm', 
+  MEDIUM = 'md', 
+  LARGE = 'lg'
+}
+
+const useStyles = makeStyles((theme: ITheme) => ({
   root: {
     display: 'inline-block',
     borderRadius: '50%',
@@ -42,8 +63,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const StatusBullet = props => {
-  const { className, size, color, ...rest } = props;
+const StatusBullet:React.FC<IProps> = ({ className, size, color, ...rest }) => {
 
   const classes = useStyles();
 
@@ -60,24 +80,6 @@ const StatusBullet = props => {
       )}
     />
   );
-};
-
-StatusBullet.propTypes = {
-  className: PropTypes.string,
-  color: PropTypes.oneOf([
-    'neutral',
-    'primary',
-    'info',
-    'success',
-    'warning',
-    'danger'
-  ]),
-  size: PropTypes.oneOf(['sm', 'md', 'lg'])
-};
-
-StatusBullet.defaultProps = {
-  size: 'md',
-  color: 'default'
 };
 
 export default StatusBullet;

@@ -1,22 +1,23 @@
-import React from "react";
+import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import { Grid, Divider } from "@material-ui/core";
+import React from "react";
 import Budget from "./Budget";
-import TotalUsers from "./TotalUsers";
+import LatestOrders from "./LatestOrders";
+import LatestProducts from "./LatestProducts";
+import LatestSales from "./LatestSales";
 import TasksProgress from "./TasksProgress";
 import TotalProfit from "./TotalProfit";
-import LatestSales from "./LatestSales";
+import TotalUsers from "./TotalUsers";
 import UsersByDevice from "./UsersByDevice";
-import LatestProducts from "./LatestProducts";
-import LatestOrders from "./LatestOrders";
+import { RouteComponentProps } from "@reach/router";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     padding: "4px"
   }
 }));
 
-const Dashboard: React.FC<{}> = () => {
+const Dashboard: React.FC<RouteComponentProps> = () => {
   const classes = useStyles();
 
   return (

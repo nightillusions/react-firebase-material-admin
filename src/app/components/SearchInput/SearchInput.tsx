@@ -1,11 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/styles';
-import { Paper, Input } from '@material-ui/core';
+import { Input, Paper } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import { makeStyles } from '@material-ui/styles';
+import clsx from 'clsx';
+import React from 'react';
+import { ITheme } from '../../theme';
 
-const useStyles = makeStyles(theme => ({
+interface IProps {
+  className?: string;
+  onChange: () => void;
+  style?: React.CSSProperties;
+  placeholder?: string;
+}
+
+const useStyles = makeStyles((theme: ITheme) => ({
   root: {
     borderRadius: '4px',
     alignItems: 'center',
@@ -25,8 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SearchInput = props => {
-  const { className, onChange, style, ...rest } = props;
+const SearchInput:React.FC<IProps> = ({ className, onChange, style, ...rest }) => {
 
   const classes = useStyles();
 
@@ -45,12 +51,6 @@ const SearchInput = props => {
       />
     </Paper>
   );
-};
-
-SearchInput.propTypes = {
-  className: PropTypes.string,
-  onChange: PropTypes.func,
-  style: PropTypes.object
 };
 
 export default SearchInput;

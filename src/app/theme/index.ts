@@ -23,6 +23,7 @@ export interface ITypography extends Typography {
 export interface IPalette extends Palette {
   icon: string;
   white: string;
+  neutral: string;
 }
 
 const theme = createMuiTheme({

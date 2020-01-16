@@ -1,15 +1,16 @@
 import { ThemeProvider } from "@material-ui/styles";
+import { Router } from "@reach/router";
 import React from "react";
 import "./App.css";
 import theme from "./theme";
-import { Router, Link } from "@reach/router";
+import { Dashboard } from "./components";
 
-const App: React.FC<any> = () => {
+const App: React.FC<{}> = () => {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Home path="/" />
-        <Dash path="dashboard" />
+        <Dashboard path="/" />
+        <UserList path="/users" />
       </Router>
     </ThemeProvider>
   );

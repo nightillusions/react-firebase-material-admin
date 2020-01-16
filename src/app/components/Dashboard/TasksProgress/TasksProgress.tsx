@@ -14,7 +14,7 @@ import InsertChartIcon from "@material-ui/icons/InsertChartOutlined";
 import { ITheme } from "../../../theme";
 
 interface IProps {
-  className: string;
+  className?: string;
 }
 
 const useStyles = makeStyles((theme: ITheme) => ({

@@ -7,7 +7,7 @@ import React from "react";
 import { ITheme } from "../../../theme";
 
 interface IProps {
-  className: string;
+  className?: string;
 }
 
 const useStyles = makeStyles((theme: ITheme) => ({

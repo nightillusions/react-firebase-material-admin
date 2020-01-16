@@ -17,7 +17,7 @@ import { ChartData, Doughnut } from "react-chartjs-2";
 import { ITheme } from "../../../theme";
 
 export interface IProps {
-  className: string;
+  className?: string;
 }
 
 const useStyles = makeStyles((theme: ITheme) => ({

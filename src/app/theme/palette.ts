@@ -1,6 +1,10 @@
 import { colors } from "@material-ui/core";
 import { PaletteOptions } from "@material-ui/core/styles/createPalette";
 
+export interface IPaletteOptions extends PaletteOptions {
+  icon: string
+}
+
 const white = "#FFFFFF";
 const black = "#000000";
 
@@ -54,4 +58,4 @@ export default {
   },
   icon: colors.blueGrey[600],
   divider: colors.grey[200]
-} as PaletteOptions;
+} as IPaletteOptions;

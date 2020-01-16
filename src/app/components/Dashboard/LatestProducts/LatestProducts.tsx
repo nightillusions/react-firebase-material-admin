@@ -21,7 +21,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import mockData from "./data";
 
 interface IProps {
-  className: string;
+  className?: string;
 }
 
 const useStyles = makeStyles(() => ({

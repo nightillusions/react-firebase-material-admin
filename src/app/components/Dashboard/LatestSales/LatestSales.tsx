@@ -17,7 +17,7 @@ import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import { data, options } from "./chart";
 
 interface IProps {
-  className: string;
+  className?: string;
 }
 
 const useStyles = makeStyles(() => ({

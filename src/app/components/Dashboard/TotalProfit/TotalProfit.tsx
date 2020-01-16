@@ -7,7 +7,7 @@ import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import { ITheme } from "../../../theme";
 
 interface IProps {
-  className: string;
+  className?: string;
 }
 
 const useStyles = makeStyles((theme: ITheme) => ({

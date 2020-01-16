@@ -22,9 +22,10 @@ import React, { useState } from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { ITheme } from "../../../theme";
 import mockData from "./data";
+import { StatusBulletSize, StatusBulletColor } from "../../StatusBullet/StatusBullet";
 
 interface IProps {
-  className: string;
+  className?: string;
 }
 
 const useStyles = makeStyles((theme: ITheme) => ({
@@ -48,11 +49,11 @@ const useStyles = makeStyles((theme: ITheme) => ({
 }));
 
 const statusColors = {
-  delivered: "success",
-  pending: "info",
-  refunded: "danger"
+  delivered: StatusBulletColor.SUCCESS,
+  pending: StatusBulletColor.INFO,
+  refunded: StatusBulletColor.DANGER
 } as {
-  [key: string]: string;
+  [key: string]: StatusBulletColor;
 };
 
 const LatestOrders: React.FC<IProps> = ({ className, ...rest }) => {
@@ -102,7 +103,7 @@ const LatestOrders: React.FC<IProps> = ({ className, ...rest }) => {
                         <StatusBullet
                           className={classes.status}
                           color={statusColors[order.status]}
-                          size="sm"
+                          size={StatusBulletSize.SMALL}
                         />
                         {order.status}
                       </div>
