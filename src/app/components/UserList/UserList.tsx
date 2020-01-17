@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import { UsersToolbar, UsersTable } from './components';
 import mockData from './data';
 import { ITheme } from '../../theme';
+import { RouteComponentProps } from '@reach/router';
 
 const useStyles = makeStyles((theme:ITheme) => ({
   root: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme:ITheme) => ({
   }
 }));
 
-const UserList: React.FC<{}> = () => {
+const UserList: React.FC<RouteComponentProps> = () => {
   const classes = useStyles();
 
   const [users] = useState(mockData);

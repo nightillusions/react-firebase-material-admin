@@ -1,19 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/styles';
-import {
-  Card,
-  CardContent,
-  CardActions,
-  Typography,
-  Grid,
-  Divider
-} from '@material-ui/core';
+import { Card, CardActions, CardContent, Divider, Grid, Typography } from '@material-ui/core';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import GetAppIcon from '@material-ui/icons/GetApp';
+import { makeStyles } from '@material-ui/styles';
+import clsx from 'clsx';
+import React from 'react';
+import { ITheme } from '../../../../theme';
 
-const useStyles = makeStyles(theme => ({
+interface IProps {
+  className?: string;
+  product: IProduct
+}
+
+export interface IProduct {
+  id: string;
+  description: string;
+  title: string;
+  imageUrl: string;
+  totalDownloads: string;
+  createdAt: string;
+}
+
+const useStyles = makeStyles((theme: ITheme) => ({
   root: {},
   imageContainer: {
     height: 64,
@@ -39,8 +46,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProductCard = props => {
-  const { className, product, ...rest } = props;
+const ProductCard: React.FC<IProps> = ({ className, product, ...rest }) => {
 
   const classes = useStyles();
 
@@ -105,11 +111,6 @@ const ProductCard = props => {
       </CardActions>
     </Card>
   );
-};
-
-ProductCard.propTypes = {
-  className: PropTypes.string,
-  product: PropTypes.object.isRequired
 };
 
 export default ProductCard;

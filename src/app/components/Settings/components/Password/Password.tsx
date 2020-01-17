@@ -1,23 +1,18 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
+import { Button, Card, CardActions, CardContent, CardHeader, Divider, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardActions,
-  Divider,
-  Button,
-  TextField
-} from '@material-ui/core';
+import clsx from 'clsx';
+import React, { useState } from 'react';
+
+interface IProps {
+  className?: string;
+}
+
 
 const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const Password = props => {
-  const { className, ...rest } = props;
+const Password:React.FC<IProps> = ({ className, ...rest }) => {
 
   const classes = useStyles();
 
@@ -26,7 +21,7 @@ const Password = props => {
     confirm: ''
   });
 
-  const handleChange = event => {
+  const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
     setValues({
       ...values,
       [event.target.name]: event.target.value
@@ -77,10 +72,6 @@ const Password = props => {
       </form>
     </Card>
   );
-};
-
-Password.propTypes = {
-  className: PropTypes.string
 };
 
 export default Password;

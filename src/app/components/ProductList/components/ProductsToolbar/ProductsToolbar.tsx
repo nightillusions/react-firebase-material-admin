@@ -1,12 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
+import clsx from 'clsx';
+import React from 'react';
+import { ITheme } from '../../../../theme';
+import SearchInput from '../../../SearchInput';
 
-import { SearchInput } from 'components';
 
-const useStyles = makeStyles(theme => ({
+interface IProps {
+  className?: string;
+}
+
+const useStyles = makeStyles((theme: ITheme) => ({
   root: {},
   row: {
     height: '42px',
@@ -28,8 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProductsToolbar = props => {
-  const { className, ...rest } = props;
+const ProductsToolbar: React.FC<IProps> = ({ className, ...rest }) => {
 
   const classes = useStyles();
 
@@ -53,14 +56,11 @@ const ProductsToolbar = props => {
         <SearchInput
           className={classes.searchInput}
           placeholder="Search product"
+          onChange={()=>{""}}
         />
       </div>
     </div>
   );
-};
-
-ProductsToolbar.propTypes = {
-  className: PropTypes.string
 };
 
 export default ProductsToolbar;

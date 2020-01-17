@@ -1,8 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid, Typography } from '@material-ui/core';
+import { ITheme } from '../../theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme:ITheme) => ({
   root: {
     padding: theme.spacing(4)
   },

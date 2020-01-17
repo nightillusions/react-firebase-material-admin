@@ -6,8 +6,9 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import { ProductsToolbar, ProductCard } from './components';
 import mockData from './data';
+import { ITheme } from '../../theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: ITheme) => ({
   root: {
     padding: theme.spacing(3)
   },
@@ -22,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProductList = () => {
+const ProductList: React.FC<{}> = () => {
   const classes = useStyles();
 
   const [products] = useState(mockData);

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { History } from 'history';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
@@ -14,6 +15,14 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import { Facebook as FacebookIcon, Google as GoogleIcon } from 'icons';
+import { ITheme } from '../../theme';
+import { RouteComponentProps, createHistory } from '@reach/router';
+
+interface IOwnProps {
+  className?: string;
+}
+
+type IProps = IOwnProps & RouteComponentProps;
 
 const schema = {
   email: {
@@ -31,7 +40,7 @@ const schema = {
   }
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: ITheme) => ({
   root: {
     backgroundColor: theme.palette.background.default,
     height: '100%'
@@ -125,8 +134,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignIn = props => {
-  const { history } = props;
+const SignIn: React.FC<IProps> = () => {
+  // listen to the browser history
+  const history = History;
 
   const classes = useStyles();
 

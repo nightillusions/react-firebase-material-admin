@@ -124,7 +124,8 @@ export default [
     },
     email: 'kwak.seong.min@devias.io',
     avatarUrl: '/images/avatars/avatar_9.png',
-    phone: '313-812-8947'
+    phone: '313-812-8947',
+    createdAt: 1523048400000
   },
   {
     id: uuid(),

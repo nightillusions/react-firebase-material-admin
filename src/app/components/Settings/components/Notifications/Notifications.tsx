@@ -1,19 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
+import { Button, Card, CardActions, CardContent, CardHeader, Checkbox, Divider, FormControlLabel, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardActions,
-  Grid,
-  Divider,
-  FormControlLabel,
-  Checkbox,
-  Typography,
-  Button
-} from '@material-ui/core';
+import clsx from 'clsx';
+import React from 'react';
+
+interface IProps {
+  className?: string;
+}
+
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -23,8 +16,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Notifications = props => {
-  const { className, ...rest } = props;
+const Notifications: React.FC<IProps> = ({className, ...rest}) => {
 
   const classes = useStyles();
 
@@ -140,10 +132,6 @@ const Notifications = props => {
       </form>
     </Card>
   );
-};
-
-Notifications.propTypes = {
-  className: PropTypes.string
 };
 
 export default Notifications;

@@ -1,4 +1,5 @@
-import uuid from 'uuid/v1';
+import {v4 as uuid} from 'uuid';
+import { IProduct } from './components/ProductCard/ProductCard';
 
 export default [
   {
@@ -55,4 +56,4 @@ export default [
     totalDownloads: '835',
     createdAt: '04/04/2019'
   }
-];
+] as IProduct[];

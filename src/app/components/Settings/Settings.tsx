@@ -3,14 +3,15 @@ import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 
 import { Notifications, Password } from './components';
+import { ITheme } from '../../theme';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: ITheme) => ({
   root: {
     padding: theme.spacing(4)
   }
 }));
 
-const Settings = () => {
+const Settings: React.FC<{}> = () => {
   const classes = useStyles();
 
   return (

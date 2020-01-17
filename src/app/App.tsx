@@ -3,7 +3,7 @@ import { Router } from "@reach/router";
 import React from "react";
 import "./App.css";
 import theme from "./theme";
-import { Dashboard } from "./components";
+import { Dashboard, UserList } from "./components";
 
 const App: React.FC<{}> = () => {
   return (

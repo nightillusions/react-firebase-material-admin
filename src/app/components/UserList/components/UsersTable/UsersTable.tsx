@@ -32,12 +32,13 @@ export interface IUser {
   name: string;
   email: string;
   avatarUrl: string;
-  createdAt: string;
+  createdAt: number;
   phone: string;
   address: {
     country: string;
     state: string;
     city: string;
+    street: string;
   };
 }
 
@@ -67,7 +68,7 @@ const UsersTable: React.FC<IProps> = ({ className, users, ...rest }) => {
 
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-  const [page, setPage] = useState<IPage>();
+  const [page, setPage] = useState<number>(0);
 
   const handleSelectAll = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -100,7 +101,7 @@ const UsersTable: React.FC<IProps> = ({ className, users, ...rest }) => {
     setSelectedUsers([]);
   };
 
-  const handlePageChange = (page: IPage) => {
+  const handlePageChange = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null, page: number) => {
     setPage(page);
   };
 
