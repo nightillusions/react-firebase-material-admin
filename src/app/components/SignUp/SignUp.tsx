@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link as RouterLink, withRouter } from 'react-router-dom';
+// import { Link as RouterLink, withRouter } from 'react-router-dom';
+import { Link as RouterLink } from '@reach/router'
 import { History } from 'history';
 import validate from 'validate.js';
 import { makeStyles } from '@material-ui/styles';
@@ -386,4 +387,4 @@ const SignUp: React.FC<{}> = () => {
   );
 };
 
-export default withRouter(SignUp);
+export default SignUp;

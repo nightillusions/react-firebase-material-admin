@@ -4,7 +4,8 @@ import { Button, colors, List, ListItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React, { forwardRef } from 'react';
-import { NavLink as RouterLink, NavLinkProps } from 'react-router-dom';
+// import { NavLink as RouterLink, NavLinkProps } from 'react-router-dom';
+import { Link as RouterLink } from '@reach/router'
 import { ITheme } from '../../../../../../theme';
 
 interface IProps {
@@ -51,12 +52,13 @@ const useStyles = makeStyles((theme: ITheme) => ({
   }
 }));
 
-const CustomRouterLink = forwardRef((props: NavLinkProps, ref: React.Ref<HTMLDivElement>): JSX.Element => (
+const CustomRouterLink = forwardRef((props: any, ref: React.Ref<HTMLDivElement>): JSX.Element => (
   <div
     ref={ref}
     style={{ flexGrow: 1 }}
   >
     <RouterLink {...props} />
+    {/* <RouterLink {...props} /> */}
   </div>
 ));
 

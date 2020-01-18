@@ -5,7 +5,8 @@ import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+// import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from '@reach/router'
 import { ITheme } from '../../../../theme';
 
 interface IProps {

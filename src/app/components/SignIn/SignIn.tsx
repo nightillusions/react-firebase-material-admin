@@ -4,7 +4,8 @@ import { makeStyles } from '@material-ui/styles';
 import { RouteComponentProps } from '@reach/router';
 import { History } from 'history';
 import React, { useEffect, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+// import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from '@reach/router'
 import validate from 'validate.js';
 import { ITheme } from '../../theme';
 import { Facebook as FacebookIcon, Google as GoogleIcon } from '../../theme/icons';

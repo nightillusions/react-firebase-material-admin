@@ -1,4 +1,5 @@
-import { Link, Typography } from '@material-ui/core';
+import { Link,  Typography } from '@material-ui/core';
+import { Link as RouterLink } from '@reach/router'
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React from 'react';
@@ -26,8 +27,8 @@ const Footer: React.FC<IProps> = ({ className, ...rest }) => {
       <Typography variant="body1">
         &copy;{' '}
         <Link
-          component="a"
-          href="https://devias.io/"
+          component={RouterLink}
+          to="https://devias.io/"
           target="_blank"
         >
           Devias IO

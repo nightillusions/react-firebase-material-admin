@@ -3,8 +3,9 @@ import { Router } from "@reach/router";
 import React from "react";
 import validate from "validate.js";
 import "./App.css";
-import { Dashboard, UserList } from "./components";
+import { Dashboard, UserList, RouteWithLayout } from "./components";
 import theme from "./theme";
+import { Main as MainLayout/*,  Minimal as MinimalLayout */ } from './layouts';
 import validators from "./utils/validators";
 
 // Chart.controllers.bar = Chart.controllers.bar.extend(chartjs);
@@ -18,7 +19,8 @@ const App: React.FC<{}> = () => {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Dashboard path="/" />
+        <RouteWithLayout path="/" layout={MainLayout} component={Dashboard} />
+        {/* <Dashboard path="/" /> */}
         <UserList path="/users" />
       </Router>
     </ThemeProvider>

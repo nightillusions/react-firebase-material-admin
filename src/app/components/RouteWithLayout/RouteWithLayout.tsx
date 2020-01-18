@@ -1,4 +1,3 @@
-import { RouteComponentProps } from '@reach/router';
 import React from 'react';
 
 interface IOwnProps {
@@ -7,7 +6,7 @@ interface IOwnProps {
   path: string;
 }
 
-type IProps = IOwnProps & RouteComponentProps
+type IProps = IOwnProps;
 
 const RouteWithLayout: React.FC<IProps> = ({ layout: Layout, component: Component, ...rest }) => {
 
