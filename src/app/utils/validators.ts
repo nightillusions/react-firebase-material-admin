@@ -8,3 +8,8 @@ export const checked = (value: boolean, options: IOptions): string => {
   } 
   return ""
 };
+
+export default {
+  checked
+};
+
