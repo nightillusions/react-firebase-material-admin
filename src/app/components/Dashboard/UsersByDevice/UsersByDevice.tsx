@@ -15,6 +15,7 @@ import clsx from "clsx";
 import React from "react";
 import { ChartData, Doughnut } from "react-chartjs-2";
 import { ITheme } from "../../../theme";
+import { ChartOptions } from "chart.js";
 
 export interface IProps {
   className?: string;
@@ -83,7 +84,7 @@ const UsersByDevice: React.FC<IProps> = ({ className, ...rest }) => {
       bodyFontColor: theme.palette.text.secondary,
       footerFontColor: theme.palette.text.secondary
     }
-  };
+  } as ChartOptions;
 
   const devices = [
     {

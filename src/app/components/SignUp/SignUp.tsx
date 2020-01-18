@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { History } from 'history';
 import validate from 'validate.js';
 import { makeStyles } from '@material-ui/styles';
 import {
@@ -14,6 +14,12 @@ import {
   Typography
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { ITheme } from '../../theme';
+import { IFormState } from '../SignIn/SignIn';
+
+declare global {
+  interface Window { browserHistory: History; }
+}
 
 const schema = {
   firstName: {
@@ -47,7 +53,7 @@ const schema = {
   }
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: ITheme) => ({
   root: {
     backgroundColor: theme.palette.background.default,
     height: '100%'
@@ -137,15 +143,17 @@ const useStyles = makeStyles(theme => ({
   },
   signUpButton: {
     margin: theme.spacing(2, 0)
-  }
+  },
+  person: {},
+  policyText: {}
 }));
 
-const SignUp = props => {
-  const { history } = props;
+const SignUp: React.FC<{}> = () => {
+  const history = window.browserHistory;
 
   const classes = useStyles();
 
-  const [formState, setFormState] = useState({
+  const [formState, setFormState] = useState<IFormState>({
     isValid: false,
     values: {},
     touched: {},
@@ -155,17 +163,17 @@ const SignUp = props => {
   useEffect(() => {
     const errors = validate(formState.values, schema);
 
-    setFormState(formState => ({
+    setFormState({
       ...formState,
       isValid: errors ? false : true,
       errors: errors || {}
-    }));
-  }, [formState.values]);
+    });
+  }, [formState, formState.values]);
 
-  const handleChange = event => {
+  const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
     event.persist();
 
-    setFormState(formState => ({
+    setFormState({
       ...formState,
       values: {
         ...formState.values,
@@ -178,19 +186,19 @@ const SignUp = props => {
         ...formState.touched,
         [event.target.name]: true
       }
-    }));
+    });
   };
 
   const handleBack = () => {
     history.goBack();
   };
 
-  const handleSignUp = event => {
+  const handleSignUp = (event:React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     history.push('/');
   };
 
-  const hasError = field =>
+  const hasError = (field: string) =>
     formState.touched[field] && formState.errors[field] ? true : false;
 
   return (
@@ -210,7 +218,7 @@ const SignUp = props => {
                 className={classes.quoteText}
                 variant="h1"
               >
-                Hella narwhal Cosby sweater McSweeney's, salvia kitsch before
+                Hella narwhal Cosby sweater McSweeneys, salvia kitsch before
                 they sold out High Life.
               </Typography>
               <div className={classes.person}>
@@ -264,7 +272,7 @@ const SignUp = props => {
                   error={hasError('firstName')}
                   fullWidth
                   helperText={
-                    hasError('firstName') ? formState.errors.firstName[0] : null
+                    hasError('firstName') ? formState.errors.firstName : null
                   }
                   label="First name"
                   name="firstName"
@@ -278,7 +286,7 @@ const SignUp = props => {
                   error={hasError('lastName')}
                   fullWidth
                   helperText={
-                    hasError('lastName') ? formState.errors.lastName[0] : null
+                    hasError('lastName') ? formState.errors.lastName : null
                   }
                   label="Last name"
                   name="lastName"
@@ -292,7 +300,7 @@ const SignUp = props => {
                   error={hasError('email')}
                   fullWidth
                   helperText={
-                    hasError('email') ? formState.errors.email[0] : null
+                    hasError('email') ? formState.errors.email : null
                   }
                   label="Email address"
                   name="email"
@@ -306,7 +314,7 @@ const SignUp = props => {
                   error={hasError('password')}
                   fullWidth
                   helperText={
-                    hasError('password') ? formState.errors.password[0] : null
+                    hasError('password') ? formState.errors.password : null
                   }
                   label="Password"
                   name="password"
@@ -317,7 +325,7 @@ const SignUp = props => {
                 />
                 <div className={classes.policy}>
                   <Checkbox
-                    checked={formState.values.policy || false}
+                    checked={Boolean(formState.values.policy) || false}
                     className={classes.policyCheckbox}
                     color="primary"
                     name="policy"
@@ -342,7 +350,7 @@ const SignUp = props => {
                 </div>
                 {hasError('policy') && (
                   <FormHelperText error>
-                    {formState.errors.policy[0]}
+                    {formState.errors.policy}
                   </FormHelperText>
                 )}
                 <Button
@@ -376,10 +384,6 @@ const SignUp = props => {
       </Grid>
     </div>
   );
-};
-
-SignUp.propTypes = {
-  history: PropTypes.object
 };
 
 export default withRouter(SignUp);

@@ -1,25 +1,10 @@
-import React, { useState } from "react";
-import clsx from "clsx";
-import PropTypes from "prop-types";
-import moment from "moment";
-import PerfectScrollbar from "react-perfect-scrollbar";
+import { Avatar, Card, CardActions, CardContent, Checkbox, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import {
-  Card,
-  CardActions,
-  CardContent,
-  Avatar,
-  Checkbox,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Typography,
-  TablePagination
-} from "@material-ui/core";
+import clsx from "clsx";
+import moment from "moment";
+import React, { useState } from "react";
+import PerfectScrollbar from "react-perfect-scrollbar";
 import { ITheme } from "../../../../theme";
-import { IPage } from "../../../../layouts/Main/components/Sidebar/components/SidebarNav/SidebarNav";
 import { getInitials } from "../../../../utils";
 
 interface IProps {

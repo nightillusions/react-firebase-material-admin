@@ -1,9 +1,8 @@
-import React from "react";
-import clsx from "clsx";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/styles";
-import { Card, CardContent, Grid, Typography, Avatar } from "@material-ui/core";
+import { Avatar, Card, CardContent, Grid, Typography } from "@material-ui/core";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+import { makeStyles } from "@material-ui/styles";
+import clsx from "clsx";
+import React from "react";
 import { ITheme } from "../../../theme";
 
 interface IProps {

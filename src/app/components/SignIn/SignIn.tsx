@@ -1,28 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { History } from 'history';
-import { Link as RouterLink, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import validate from 'validate.js';
-import { makeStyles } from '@material-ui/styles';
-import {
-  Grid,
-  Button,
-  IconButton,
-  TextField,
-  Link,
-  Typography
-} from '@material-ui/core';
+import { Button, Grid, IconButton, Link, TextField, Typography } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-
-import { Facebook as FacebookIcon, Google as GoogleIcon } from 'icons';
+import { makeStyles } from '@material-ui/styles';
+import { RouteComponentProps } from '@reach/router';
+import { History } from 'history';
+import React, { useEffect, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import validate from 'validate.js';
 import { ITheme } from '../../theme';
-import { RouteComponentProps, createHistory } from '@reach/router';
+import { Facebook as FacebookIcon, Google as GoogleIcon } from '../../theme/icons';
+
 
 interface IOwnProps {
   className?: string;
 }
 
 type IProps = IOwnProps & RouteComponentProps;
+
+declare global {
+    interface Window { browserHistory: History; }
+}
+
+export interface IFormState {
+  isValid: boolean,
+  values: IFormProps,
+  touched: IFormProps,
+  errors: IFormProps
+}
+export interface IFormProps {
+  [key: string]: boolean | string | undefined
+}
 
 const schema = {
   email: {
@@ -131,16 +137,17 @@ const useStyles = makeStyles((theme: ITheme) => ({
   },
   signInButton: {
     margin: theme.spacing(2, 0)
-  }
+  },
+  person: {}
 }));
 
 const SignIn: React.FC<IProps> = () => {
   // listen to the browser history
-  const history = History;
+  const history = window.browserHistory;
 
   const classes = useStyles();
 
-  const [formState, setFormState] = useState({
+  const [formState, setFormState] = useState<IFormState>({
     isValid: false,
     values: {},
     touched: {},
@@ -150,21 +157,21 @@ const SignIn: React.FC<IProps> = () => {
   useEffect(() => {
     const errors = validate(formState.values, schema);
 
-    setFormState(formState => ({
+    setFormState({
       ...formState,
       isValid: errors ? false : true,
       errors: errors || {}
-    }));
-  }, [formState.values]);
+    });
+  }, [formState, formState.values]);
 
   const handleBack = () => {
     history.goBack();
   };
 
-  const handleChange = event => {
+  const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
     event.persist();
 
-    setFormState(formState => ({
+    setFormState({
       ...formState,
       values: {
         ...formState.values,
@@ -177,15 +184,15 @@ const SignIn: React.FC<IProps> = () => {
         ...formState.touched,
         [event.target.name]: true
       }
-    }));
+    });
   };
 
-  const handleSignIn = event => {
+  const handleSignIn = (event:React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     history.push('/');
   };
 
-  const hasError = field =>
+  const hasError = (field: string) =>
     formState.touched[field] && formState.errors[field] ? true : false;
 
   return (
@@ -205,7 +212,7 @@ const SignIn: React.FC<IProps> = () => {
                 className={classes.quoteText}
                 variant="h1"
               >
-                Hella narwhal Cosby sweater McSweeney's, salvia kitsch before
+                Hella narwhal Cosby sweater McSweeneys, salvia kitsch before
                 they sold out High Life.
               </Typography>
               <div className={classes.person}>
@@ -294,7 +301,7 @@ const SignIn: React.FC<IProps> = () => {
                   error={hasError('email')}
                   fullWidth
                   helperText={
-                    hasError('email') ? formState.errors.email[0] : null
+                    hasError('email') ? formState.errors.email : null
                   }
                   label="Email address"
                   name="email"
@@ -308,7 +315,7 @@ const SignIn: React.FC<IProps> = () => {
                   error={hasError('password')}
                   fullWidth
                   helperText={
-                    hasError('password') ? formState.errors.password[0] : null
+                    hasError('password') ? formState.errors.password : null
                   }
                   label="Password"
                   name="password"
@@ -332,7 +339,7 @@ const SignIn: React.FC<IProps> = () => {
                   color="textSecondary"
                   variant="body1"
                 >
-                  Don't have an account?{' '}
+                  Dont have an account?{' '}
                   <Link
                     component={RouterLink}
                     to="/sign-up"
@@ -350,8 +357,4 @@ const SignIn: React.FC<IProps> = () => {
   );
 };
 
-SignIn.propTypes = {
-  history: PropTypes.object
-};
-
-export default withRouter(SignIn);
+export default SignIn;

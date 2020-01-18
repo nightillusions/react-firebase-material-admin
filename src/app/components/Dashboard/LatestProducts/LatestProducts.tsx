@@ -1,24 +1,11 @@
-import React, { useState } from "react";
-import clsx from "clsx";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/styles";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardActions,
-  Button,
-  Divider,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  IconButton
-} from "@material-ui/core";
+import { Button, Card, CardActions, CardContent, CardHeader, Divider, IconButton, List, ListItem, ListItemAvatar, ListItemText } from "@material-ui/core";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-
+import { makeStyles } from "@material-ui/styles";
+import clsx from "clsx";
+import React, { useState } from "react";
 import mockData from "./data";
+
 
 interface IProps {
   className?: string;

@@ -1,4 +1,7 @@
 import theme from "../../../theme";
+import { ChartData as ChartJsData, ChartOptions } from "chart.js";
+import { ChartData } from "react-chartjs-2";
+
 
 export const data = {
   labels: ["1 Aug", "2 Aug", "3 Aug", "4 Aug", "5 Aug", "6 Aug"],
@@ -6,15 +9,23 @@ export const data = {
     {
       label: "This year",
       backgroundColor: theme.palette.primary.main,
-      data: [18, 5, 19, 27, 29, 19, 20]
+      data: [18, 5, 19, 27, 29, 19, 20],
+      barThickness: 12,
+      maxBarThickness: 10,
+      barPercentage: 0.5,
+      categoryPercentage: 0.5,
     },
     {
       label: "Last year",
       backgroundColor: theme.palette.common,
-      data: [11, 20, 12, 29, 30, 25, 13]
+      data: [11, 20, 12, 29, 30, 25, 13],
+      barThickness: 12,
+      maxBarThickness: 10,
+      barPercentage: 0.5,
+      categoryPercentage: 0.5,
     }
   ]
-};
+} as ChartData<ChartJsData>;
 
 export const options = {
   responsive: true,
@@ -37,10 +48,6 @@ export const options = {
   scales: {
     xAxes: [
       {
-        barThickness: 12,
-        maxBarThickness: 10,
-        barPercentage: 0.5,
-        categoryPercentage: 0.5,
         ticks: {
           fontColor: theme.palette.text.secondary
         },
@@ -59,14 +66,14 @@ export const options = {
         },
         gridLines: {
           borderDash: [2],
-          borderDashOffset: [2],
+          borderDashOffset: 2,
           color: theme.palette.divider,
           drawBorder: false,
           zeroLineBorderDash: [2],
-          zeroLineBorderDashOffset: [2],
+          zeroLineBorderDashOffset: 2,
           zeroLineColor: theme.palette.divider
         }
       }
     ]
   }
-};
+} as ChartOptions;

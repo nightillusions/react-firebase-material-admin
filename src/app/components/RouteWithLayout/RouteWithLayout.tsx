@@ -1,6 +1,5 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
 import { RouteComponentProps } from '@reach/router';
+import React from 'react';
 
 interface IOwnProps {
   component: React.ElementType;
