@@ -15,12 +15,10 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
-      - name: Make artifact dir
-        run: mkdir -p ./dist
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
-          name: dist
+          name: artifact
           path: dist
   deploy:
     name: Deploy
@@ -29,13 +27,10 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
-      - name: Make artifact dir
-        run: mkdir -p ./dist
       - name: Download Artifact
         uses: actions/download-artifact@master
         with:
-          name: dist
-          path: dist
+          name: artifact
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
