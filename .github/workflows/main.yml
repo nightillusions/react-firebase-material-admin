@@ -29,6 +29,8 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
+      - name: Make artifact dir
+        run: mkdir -p ./dist
       - name: Download Artifact
         uses: actions/download-artifact@master
         with:
