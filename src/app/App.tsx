@@ -20,8 +20,7 @@ const App: React.FC<{}> = () => {
     <ThemeProvider theme={theme}>
       <Router>
         <RouteWithLayout path="/" layout={MainLayout} component={Dashboard} />
-        {/* <Dashboard path="/" /> */}
-        <UserList path="/users" />
+        <RouteWithLayout path="/" layout={MainLayout} component={UserList} />
       </Router>
     </ThemeProvider>
   );
