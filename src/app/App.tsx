@@ -3,7 +3,7 @@ import { Router } from "@reach/router";
 import React from "react";
 import validate from "validate.js";
 import "./App.css";
-import { Dashboard, UserList, RouteWithLayout } from "./components";
+import { Dashboard, UserList, RouteWithLayout, Account, NotFound, ProductList } from "./components";
 import theme from "./theme";
 import { Main as MainLayout/*,  Minimal as MinimalLayout */ } from './layouts';
 import validators from "./utils/validators";
@@ -20,7 +20,10 @@ const App: React.FC<{}> = () => {
     <ThemeProvider theme={theme}>
       <Router>
         <RouteWithLayout path="/" layout={MainLayout} component={Dashboard} />
-        <RouteWithLayout path="/" layout={MainLayout} component={UserList} />
+        <RouteWithLayout path="/users" layout={MainLayout} component={UserList} />
+        <RouteWithLayout path="/account" layout={MainLayout} component={Account} />
+        <RouteWithLayout path="/products" layout={MainLayout} component={ProductList} />
+        <RouteWithLayout path="/notfound" layout={MainLayout} component={NotFound} />
       </Router>
     </ThemeProvider>
   );
