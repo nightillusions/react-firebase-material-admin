@@ -1,5 +1,8 @@
 {
   "name": "trador-app-web",
+  "author": "Pascal Jordin <pascal@jordin.eu>",
+  "email": "pascal@jordin.eu",
+  "licence": "MIT",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
