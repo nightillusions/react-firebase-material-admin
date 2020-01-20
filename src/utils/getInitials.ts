@@ -1,4 +1,4 @@
-export default (name = ''):string =>
+export default (name = ''): string =>
   name
     .replace(/\s+/, ' ')
     .split(' ')

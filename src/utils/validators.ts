@@ -4,12 +4,11 @@ export interface IOptions {
 
 export const checked = (value: boolean, options: IOptions): string => {
   if (!value) {
-    return options.message || "must be checked";
-  } 
-  return ""
+    return options.message || 'must be checked';
+  }
+  return '';
 };
 
 export default {
   checked
 };
-

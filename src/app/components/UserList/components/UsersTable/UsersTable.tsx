@@ -1,11 +1,24 @@
-import { Avatar, Card, CardActions, CardContent, Checkbox, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import clsx from "clsx";
-import moment from "moment";
-import React, { useState } from "react";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import { ITheme } from "../../../../theme";
-import { getInitials } from "../../../../utils";
+import {
+  Avatar,
+  Card,
+  CardActions,
+  CardContent,
+  Checkbox,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TablePagination,
+  TableRow,
+  Typography
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
+import clsx from 'clsx';
+import moment from 'moment';
+import React, { useState } from 'react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import { ITheme } from '../../../../theme';
+import { getInitials } from '../../../../../utils';
 
 interface IProps {
   className?: string;
@@ -36,14 +49,14 @@ const useStyles = makeStyles((theme: ITheme) => ({
     minWidth: 1050
   },
   nameContainer: {
-    display: "flex",
-    alignItems: "center"
+    display: 'flex',
+    alignItems: 'center'
   },
   avatar: {
     marginRight: theme.spacing(2)
   },
   actions: {
-    justifyContent: "flex-end"
+    justifyContent: 'flex-end'
   },
   tableRow: {}
 }));
@@ -86,7 +99,10 @@ const UsersTable: React.FC<IProps> = ({ className, users, ...rest }) => {
     setSelectedUsers([]);
   };
 
-  const handlePageChange = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null, page: number) => {
+  const handlePageChange = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
+    page: number
+  ) => {
     setPage(page);
   };
 
@@ -128,8 +144,7 @@ const UsersTable: React.FC<IProps> = ({ className, users, ...rest }) => {
                     className={classes.tableRow}
                     hover
                     key={user.id}
-                    selected={selectedUsers.indexOf(user.id) !== -1}
-                  >
+                    selected={selectedUsers.indexOf(user.id) !== -1}>
                     <TableCell padding="checkbox">
                       <Checkbox
                         checked={selectedUsers.indexOf(user.id) !== -1}
@@ -148,12 +163,12 @@ const UsersTable: React.FC<IProps> = ({ className, users, ...rest }) => {
                     </TableCell>
                     <TableCell>{user.email}</TableCell>
                     <TableCell>
-                      {user.address.city}, {user.address.state},{" "}
+                      {user.address.city}, {user.address.state},{' '}
                       {user.address.country}
                     </TableCell>
                     <TableCell>{user.phone}</TableCell>
                     <TableCell>
-                      {moment(user.createdAt).format("DD/MM/YYYY")}
+                      {moment(user.createdAt).format('DD/MM/YYYY')}
                     </TableCell>
                   </TableRow>
                 ))}

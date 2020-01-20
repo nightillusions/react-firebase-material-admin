@@ -18,7 +18,7 @@ import {
 } from './components';
 import theme from './theme';
 import { Main as MainLayout /*,  Minimal as MinimalLayout */ } from './layouts';
-import validators from './utils/validators';
+import validators from '../utils/validators';
 
 // Chart.controllers.bar = Chart.controllers.bar.extend(chartjs);
 
