@@ -9,7 +9,6 @@ interface IOwnProps {
 type IProps = IOwnProps;
 
 const RouteWithLayout: React.FC<IProps> = ({ layout: Layout, component: Component, ...rest }) => {
-
   return (
         <Layout>
           <Component {...rest} />

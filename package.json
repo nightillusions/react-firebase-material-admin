@@ -30,6 +30,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
     "typescript": "~3.7.2",
+    "unstated-next": "^1.1.0",
     "uuid": "^3.3.3",
     "validate.js": "^0.13.1"
   },
