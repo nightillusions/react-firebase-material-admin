@@ -31,7 +31,7 @@ const App: React.FC<{}> = () => {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Redirect path="/" to="/dashboard" />
+        <Redirect from="/" to="/dashboard" />
         <RouteWithLayout
           path="/dashboard"
           layout={MainLayout}
