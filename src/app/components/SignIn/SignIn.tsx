@@ -1,15 +1,26 @@
-import { Button, Grid, IconButton, Link, TextField, Typography } from '@material-ui/core';
+import {
+  Button,
+  Grid,
+  IconButton,
+  Link,
+  TextField,
+  Typography
+} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { makeStyles } from '@material-ui/styles';
-import { RouteComponentProps } from '@reach/router';
+import { RouteComponentProps, navigate } from '@reach/router';
 import { History } from 'history';
 import React, { useEffect, useState } from 'react';
-// import { Link as RouterLink } from 'react-router-dom';
-import { Link as RouterLink } from '@reach/router'
+// import { Link as RouterLink } from '<react-router-dom>';
+import { Link as RouterLink } from '@reach/router';
 import validate from 'validate.js';
 import { ITheme } from '../../theme';
-import { Facebook as FacebookIcon, Google as GoogleIcon } from '../../theme/icons';
-
+import {
+  Facebook as FacebookIcon,
+  Google as GoogleIcon
+} from '../../theme/icons';
+import { Auth } from '../../App';
+import firebase from 'firebase';
 
 interface IOwnProps {
   className?: string;
@@ -18,17 +29,19 @@ interface IOwnProps {
 type IProps = IOwnProps & RouteComponentProps;
 
 declare global {
-    interface Window { browserHistory: History; }
+  interface Window {
+    browserHistory: History;
+  }
 }
 
 export interface IFormState {
-  isValid: boolean,
-  values: IFormProps,
-  touched: IFormProps,
-  errors: IFormProps
+  isValid: boolean;
+  values: IFormProps;
+  touched: IFormProps;
+  errors: IFormProps;
 }
 export interface IFormProps {
-  [key: string]: boolean | string | undefined
+  [key: string]: boolean | string | undefined;
 }
 
 const schema = {
@@ -143,6 +156,12 @@ const useStyles = makeStyles((theme: ITheme) => ({
 }));
 
 const SignIn: React.FC<IProps> = () => {
+  const authContainer = Auth.useContainer();
+
+  if (authContainer.user) {
+    navigate('/');
+  }
+
   // listen to the browser history
   const history = window.browserHistory;
 
@@ -169,7 +188,7 @@ const SignIn: React.FC<IProps> = () => {
     history.goBack();
   };
 
-  const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.persist();
 
     setFormState({
@@ -188,9 +207,28 @@ const SignIn: React.FC<IProps> = () => {
     });
   };
 
-  const handleSignIn = (event:React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleSignIn = async (
+    event:
+      | React.FormEvent<HTMLFormElement>
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     event.preventDefault();
-    history.push('/');
+
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(
+        String(formState.values['email']),
+        String(formState.values['password'])
+      );
+    navigate('/');
+  };
+
+  const handleSignInWithFacebook = async (
+    event:
+      | React.FormEvent<HTMLFormElement>
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
   };
 
   const hasError = (field: string) =>
@@ -198,47 +236,26 @@ const SignIn: React.FC<IProps> = () => {
 
   return (
     <div className={classes.root}>
-      <Grid
-        className={classes.grid}
-        container
-      >
-        <Grid
-          className={classes.quoteContainer}
-          item
-          lg={5}
-        >
+      <Grid className={classes.grid} container>
+        <Grid className={classes.quoteContainer} item lg={5}>
           <div className={classes.quote}>
             <div className={classes.quoteInner}>
-              <Typography
-                className={classes.quoteText}
-                variant="h1"
-              >
+              <Typography className={classes.quoteText} variant="h1">
                 Hella narwhal Cosby sweater McSweeneys, salvia kitsch before
                 they sold out High Life.
               </Typography>
               <div className={classes.person}>
-                <Typography
-                  className={classes.name}
-                  variant="body1"
-                >
+                <Typography className={classes.name} variant="body1">
                   Takamaru Ayako
                 </Typography>
-                <Typography
-                  className={classes.bio}
-                  variant="body2"
-                >
+                <Typography className={classes.bio} variant="body2">
                   Manager at inVision
                 </Typography>
               </div>
             </div>
           </div>
         </Grid>
-        <Grid
-          className={classes.content}
-          item
-          lg={7}
-          xs={12}
-        >
+        <Grid className={classes.content} item lg={7} xs={12}>
           <div className={classes.content}>
             <div className={classes.contentHeader}>
               <IconButton onClick={handleBack}>
@@ -246,34 +263,20 @@ const SignIn: React.FC<IProps> = () => {
               </IconButton>
             </div>
             <div className={classes.contentBody}>
-              <form
-                className={classes.form}
-                onSubmit={handleSignIn}
-              >
-                <Typography
-                  className={classes.title}
-                  variant="h2"
-                >
+              <form className={classes.form} onSubmit={handleSignIn}>
+                <Typography className={classes.title} variant="h2">
                   Sign in
                 </Typography>
-                <Typography
-                  color="textSecondary"
-                  gutterBottom
-                >
+                <Typography color="textSecondary" gutterBottom>
                   Sign in with social media
                 </Typography>
-                <Grid
-                  className={classes.socialButtons}
-                  container
-                  spacing={2}
-                >
+                <Grid className={classes.socialButtons} container spacing={2}>
                   <Grid item>
                     <Button
                       color="primary"
-                      onClick={handleSignIn}
+                      onClick={handleSignInWithFacebook}
                       size="large"
-                      variant="contained"
-                    >
+                      variant="contained">
                       <FacebookIcon className={classes.socialIcon} />
                       Login with Facebook
                     </Button>
@@ -282,8 +285,7 @@ const SignIn: React.FC<IProps> = () => {
                     <Button
                       onClick={handleSignIn}
                       size="large"
-                      variant="contained"
-                    >
+                      variant="contained">
                       <GoogleIcon className={classes.socialIcon} />
                       Login with Google
                     </Button>
@@ -293,17 +295,14 @@ const SignIn: React.FC<IProps> = () => {
                   align="center"
                   className={classes.sugestion}
                   color="textSecondary"
-                  variant="body1"
-                >
+                  variant="body1">
                   or login with email address
                 </Typography>
                 <TextField
                   className={classes.textField}
                   error={hasError('email')}
                   fullWidth
-                  helperText={
-                    hasError('email') ? formState.errors.email : null
-                  }
+                  helperText={hasError('email') ? formState.errors.email : null}
                   label="Email address"
                   name="email"
                   onChange={handleChange}
@@ -332,20 +331,12 @@ const SignIn: React.FC<IProps> = () => {
                   fullWidth
                   size="large"
                   type="submit"
-                  variant="contained"
-                >
+                  variant="contained">
                   Sign in now
                 </Button>
-                <Typography
-                  color="textSecondary"
-                  variant="body1"
-                >
+                <Typography color="textSecondary" variant="body1">
                   Dont have an account?{' '}
-                  <Link
-                    component={RouterLink}
-                    to="/sign-up"
-                    variant="h6"
-                  >
+                  <Link component={RouterLink} to="/sign-up" variant="h6">
                     Sign up
                   </Link>
                 </Typography>
