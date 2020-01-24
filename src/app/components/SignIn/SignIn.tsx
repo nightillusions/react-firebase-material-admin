@@ -21,6 +21,7 @@ import {
 } from '../../theme/icons';
 import { Auth } from '../../App';
 import firebase from 'firebase';
+import useSignInWith from '../../hooks/useSignIn';
 
 interface IOwnProps {
   className?: string;
@@ -173,6 +174,7 @@ const SignIn: React.FC<IProps> = () => {
     touched: {},
     errors: {}
   });
+  const signInWith = useSignInWith();
 
   useEffect(() => {
     const errors = validate(formState.values, schema);
@@ -223,14 +225,6 @@ const SignIn: React.FC<IProps> = () => {
     navigate('/');
   };
 
-  const handleSignInWithFacebook = async (
-    event:
-      | React.FormEvent<HTMLFormElement>
-      | React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    event.preventDefault();
-  };
-
   const hasError = (field: string) =>
     formState.touched[field] && formState.errors[field] ? true : false;
 
@@ -274,7 +268,7 @@ const SignIn: React.FC<IProps> = () => {
                   <Grid item>
                     <Button
                       color="primary"
-                      onClick={handleSignInWithFacebook}
+                      onClick={() => signInWith.facebook}
                       size="large"
                       variant="contained">
                       <FacebookIcon className={classes.socialIcon} />
@@ -283,7 +277,7 @@ const SignIn: React.FC<IProps> = () => {
                   </Grid>
                   <Grid item>
                     <Button
-                      onClick={handleSignIn}
+                      onClick={() => signInWith.google}
                       size="large"
                       variant="contained">
                       <GoogleIcon className={classes.socialIcon} />

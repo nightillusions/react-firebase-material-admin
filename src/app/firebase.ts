@@ -35,6 +35,18 @@ Firebase.firestore()
   });
 
 const FirebaseContext = React.createContext(null);
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+const facebookProvider = new firebase.auth.FacebookAuthProvider();
+const microsoftProvider = new firebase.auth.OAuthProvider('microsoft.com');
+const twitterProvider = new firebase.auth.TwitterAuthProvider();
+const githubProvider = new firebase.auth.GithubAuthProvider();
 
-export { FirebaseContext };
+export {
+  FirebaseContext,
+  googleProvider,
+  facebookProvider,
+  microsoftProvider,
+  twitterProvider,
+  githubProvider
+};
 export default Firebase;
