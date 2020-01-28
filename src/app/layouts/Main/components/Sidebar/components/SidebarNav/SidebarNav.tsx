@@ -1,11 +1,8 @@
-/* eslint-disable react/no-multi-comp */
-/* eslint-disable react/display-name */
 import { Button, colors, List, ListItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import { Link, Match } from '@reach/router';
 import clsx from 'clsx';
 import React, { forwardRef } from 'react';
-// import { NavLink as RouterLink, NavLinkProps } from 'react-router-dom';
-import { Link as RouterLink } from '@reach/router'
 import { ITheme } from '../../../../../../theme';
 
 interface IProps {
@@ -52,19 +49,18 @@ const useStyles = makeStyles((theme: ITheme) => ({
   }
 }));
 
-const CustomRouterLink = forwardRef((props: any, ref: React.Ref<HTMLDivElement>): JSX.Element => (
-  <div
-    ref={ref}
-    style={{ flexGrow: 1 }}
-  >
-    <RouterLink {...props} />
-    {/* <RouterLink {...props} /> */}
-  </div>
-));
-
 const SidebarNav:React.FC<IProps> = ({ pages, className, ...rest }) => {
-
+  
   const classes = useStyles();
+  
+  // eslint-disable-next-line react/display-name
+  const CustomLink = forwardRef((props: any, ref: React.Ref<HTMLDivElement>): JSX.Element => (
+      <Match path={`${props.to}/*`}>
+        {({match}) => (<div ref={ref} style={{ flexGrow: 1 }}>
+            <Link {...props} className={clsx(props.className, Boolean(match) && classes.active)} />
+          </div>)
+        }
+      </Match>));
 
   return (
     <List
@@ -78,9 +74,7 @@ const SidebarNav:React.FC<IProps> = ({ pages, className, ...rest }) => {
           key={page.title}
         >
           <Button
-            activeClassName={classes.active}
-            className={classes.button}
-            component={CustomRouterLink}
+            component={CustomLink}
             to={page.href}
           >
             <div className={classes.icon}>{page.icon}</div>
