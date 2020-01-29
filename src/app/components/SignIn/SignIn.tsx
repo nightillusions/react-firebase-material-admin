@@ -8,20 +8,23 @@ import {
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { makeStyles } from '@material-ui/styles';
-import { RouteComponentProps, navigate } from '@reach/router';
+import {
+  Link as RouterLink,
+  navigate,
+  Redirect,
+  RouteComponentProps
+} from '@reach/router';
+import firebase from 'firebase';
 import { History } from 'history';
 import React, { useEffect, useState } from 'react';
-// import { Link as RouterLink } from '<react-router-dom>';
-import { Link as RouterLink } from '@reach/router';
 import validate from 'validate.js';
+import { Auth } from '../../App';
+import useSignInWith from '../../hooks/useSignIn';
 import { ITheme } from '../../theme';
 import {
   Facebook as FacebookIcon,
   Google as GoogleIcon
 } from '../../theme/icons';
-import { Auth } from '../../App';
-import firebase from 'firebase';
-import useSignInWith from '../../hooks/useSignIn';
 
 interface IOwnProps {
   className?: string;
@@ -157,24 +160,16 @@ const useStyles = makeStyles((theme: ITheme) => ({
 }));
 
 const SignIn: React.FC<IProps> = () => {
-  const authContainer = Auth.useContainer();
-
-  if (authContainer.user) {
-    navigate('/');
-  }
-
-  // listen to the browser history
   const history = window.browserHistory;
-
+  const { user } = Auth.useContainer();
   const classes = useStyles();
-
+  const signInWith = useSignInWith();
   const [formState, setFormState] = useState<IFormState>({
     isValid: false,
     values: {},
     touched: {},
     errors: {}
   });
-  const signInWith = useSignInWith();
 
   useEffect(() => {
     const errors = validate(formState.values, schema);
@@ -184,7 +179,12 @@ const SignIn: React.FC<IProps> = () => {
       isValid: errors ? false : true,
       errors: errors || {}
     });
-  }, [formState, formState.values]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formState.values]);
+
+  if (user) {
+    return <Redirect from="" to="/" noThrow />;
+  }
 
   const handleBack = () => {
     history.goBack();
@@ -268,7 +268,7 @@ const SignIn: React.FC<IProps> = () => {
                   <Grid item>
                     <Button
                       color="primary"
-                      onClick={() => signInWith.facebook}
+                      onClick={signInWith.facebook}
                       size="large"
                       variant="contained">
                       <FacebookIcon className={classes.socialIcon} />
@@ -277,7 +277,7 @@ const SignIn: React.FC<IProps> = () => {
                   </Grid>
                   <Grid item>
                     <Button
-                      onClick={() => signInWith.google}
+                      onClick={signInWith.google}
                       size="large"
                       variant="contained">
                       <GoogleIcon className={classes.socialIcon} />

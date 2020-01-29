@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { Link as RouterLink, withRouter } from 'react-router-dom';
-import { Link as RouterLink } from '@reach/router'
+import { Link as RouterLink } from '@reach/router';
 import { History } from 'history';
 import validate from 'validate.js';
 import { makeStyles } from '@material-ui/styles';
@@ -19,7 +18,9 @@ import { ITheme } from '../../theme';
 import { IFormState } from '../SignIn/SignIn';
 
 declare global {
-  interface Window { browserHistory: History; }
+  interface Window {
+    browserHistory: History;
+  }
 }
 
 const schema = {
@@ -169,9 +170,10 @@ const SignUp: React.FC<{}> = () => {
       isValid: errors ? false : true,
       errors: errors || {}
     });
-  }, [formState, formState.values]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formState.values]);
 
-  const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.persist();
 
     setFormState({
@@ -194,7 +196,11 @@ const SignUp: React.FC<{}> = () => {
     history.goBack();
   };
 
-  const handleSignUp = (event:React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleSignUp = (
+    event:
+      | React.FormEvent<HTMLFormElement>
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     event.preventDefault();
     history.push('/');
   };
@@ -204,47 +210,26 @@ const SignUp: React.FC<{}> = () => {
 
   return (
     <div className={classes.root}>
-      <Grid
-        className={classes.grid}
-        container
-      >
-        <Grid
-          className={classes.quoteContainer}
-          item
-          lg={5}
-        >
+      <Grid className={classes.grid} container>
+        <Grid className={classes.quoteContainer} item lg={5}>
           <div className={classes.quote}>
             <div className={classes.quoteInner}>
-              <Typography
-                className={classes.quoteText}
-                variant="h1"
-              >
+              <Typography className={classes.quoteText} variant="h1">
                 Hella narwhal Cosby sweater McSweeneys, salvia kitsch before
                 they sold out High Life.
               </Typography>
               <div className={classes.person}>
-                <Typography
-                  className={classes.name}
-                  variant="body1"
-                >
+                <Typography className={classes.name} variant="body1">
                   Takamaru Ayako
                 </Typography>
-                <Typography
-                  className={classes.bio}
-                  variant="body2"
-                >
+                <Typography className={classes.bio} variant="body2">
                   Manager at inVision
                 </Typography>
               </div>
             </div>
           </div>
         </Grid>
-        <Grid
-          className={classes.content}
-          item
-          lg={7}
-          xs={12}
-        >
+        <Grid className={classes.content} item lg={7} xs={12}>
           <div className={classes.content}>
             <div className={classes.contentHeader}>
               <IconButton onClick={handleBack}>
@@ -252,20 +237,11 @@ const SignUp: React.FC<{}> = () => {
               </IconButton>
             </div>
             <div className={classes.contentBody}>
-              <form
-                className={classes.form}
-                onSubmit={handleSignUp}
-              >
-                <Typography
-                  className={classes.title}
-                  variant="h2"
-                >
+              <form className={classes.form} onSubmit={handleSignUp}>
+                <Typography className={classes.title} variant="h2">
                   Create new account
                 </Typography>
-                <Typography
-                  color="textSecondary"
-                  gutterBottom
-                >
+                <Typography color="textSecondary" gutterBottom>
                   Use your email to create new account
                 </Typography>
                 <TextField
@@ -300,9 +276,7 @@ const SignUp: React.FC<{}> = () => {
                   className={classes.textField}
                   error={hasError('email')}
                   fullWidth
-                  helperText={
-                    hasError('email') ? formState.errors.email : null
-                  }
+                  helperText={hasError('email') ? formState.errors.email : null}
                   label="Email address"
                   name="email"
                   onChange={handleChange}
@@ -335,16 +309,14 @@ const SignUp: React.FC<{}> = () => {
                   <Typography
                     className={classes.policyText}
                     color="textSecondary"
-                    variant="body1"
-                  >
+                    variant="body1">
                     I have read the{' '}
                     <Link
                       color="primary"
                       component={RouterLink}
                       to="#"
                       underline="always"
-                      variant="h6"
-                    >
+                      variant="h6">
                       Terms and Conditions
                     </Link>
                   </Typography>
@@ -361,20 +333,12 @@ const SignUp: React.FC<{}> = () => {
                   fullWidth
                   size="large"
                   type="submit"
-                  variant="contained"
-                >
+                  variant="contained">
                   Sign up now
                 </Button>
-                <Typography
-                  color="textSecondary"
-                  variant="body1"
-                >
+                <Typography color="textSecondary" variant="body1">
                   Have an account?{' '}
-                  <Link
-                    component={RouterLink}
-                    to="/sign-in"
-                    variant="h6"
-                  >
+                  <Link component={RouterLink} to="/sign-in" variant="h6">
                     Sign in
                   </Link>
                 </Typography>

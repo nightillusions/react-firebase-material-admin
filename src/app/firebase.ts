@@ -14,6 +14,8 @@ const firebaseConfig = {
   appId: '1:721326177413:web:6d527c14e63e0649b5bdec',
   measurementId: 'G-044QX56BXY'
 };
+firebase.firestore.setLogLevel('debug');
+
 const Firebase = firebase.initializeApp(firebaseConfig);
 
 Firebase.analytics();

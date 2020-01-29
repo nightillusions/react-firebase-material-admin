@@ -17,7 +17,7 @@ import {
   SignIn
 } from './components';
 import theme from './theme';
-import { Main as MainLayout /*,  Minimal as MinimalLayout */ } from './layouts';
+import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
 import validators from '../utils/validators';
 import { createContainer } from 'unstated-next';
 import useAuth from './hooks/useAuth';
@@ -36,7 +36,7 @@ const App: React.FC<{}> = () => {
     <ThemeProvider theme={theme}>
       <Auth.Provider>
         <Router>
-          <Redirect from="/" to="/dashboard" />
+          <Redirect from="/" to="/dashboard" noThrow />
           <RouteWithLayout
             path="/dashboard"
             layout={MainLayout}
@@ -74,23 +74,21 @@ const App: React.FC<{}> = () => {
           />
           <RouteWithLayout
             path="/sign-up"
-            layout={MainLayout}
+            layout={MinimalLayout}
             component={SignUp}
+            publicPath
           />
           <RouteWithLayout
             path="/sign-in"
-            layout={MainLayout}
+            layout={MinimalLayout}
             component={SignIn}
-          />
-          <RouteWithLayout
-            path="/sign-in"
-            layout={MainLayout}
-            component={SignIn}
+            publicPath
           />
           <RouteWithLayout
             path="/notfound"
-            layout={MainLayout}
+            layout={MinimalLayout}
             component={NotFound}
+            publicPath
           />
         </Router>
       </Auth.Provider>
