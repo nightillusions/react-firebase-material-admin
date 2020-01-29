@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid, Typography as MuiTypography } from '@material-ui/core';
 import { ITheme } from '../../theme';
-import { ThemeStyle } from '@material-ui/core/styles/createTypography';
 
 const useStyles = makeStyles((theme: ITheme) => ({
   root: {
@@ -42,7 +41,7 @@ const Typography = () => {
               <MuiTypography variant="caption">{key}</MuiTypography>
             </Grid>
             <Grid item sm={9} xs={12}>
-              <MuiTypography variant={key as ThemeStyle | 'srOnly' | 'inherit'}>
+              <MuiTypography variant={key as any}>
                 {variants[key]}
               </MuiTypography>
             </Grid>
