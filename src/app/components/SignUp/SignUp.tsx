@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link as RouterLink } from '@reach/router';
+import { Link as RouterLink, navigate } from '@reach/router';
 import { History } from 'history';
 import validate from 'validate.js';
 import { makeStyles } from '@material-ui/styles';
@@ -16,6 +16,7 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { ITheme } from '../../theme';
 import { IFormState } from '../SignIn/SignIn';
+import firebase from 'firebase';
 
 declare global {
   interface Window {
@@ -196,13 +197,19 @@ const SignUp: React.FC<{}> = () => {
     history.goBack();
   };
 
-  const handleSignUp = (
+  const handleSignUp = async (
     event:
       | React.FormEvent<HTMLFormElement>
       | React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault();
-    history.push('/');
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(
+        String(formState.values['email']),
+        String(formState.values['password'])
+      );
+    navigate('/');
   };
 
   const hasError = (field: string) =>
