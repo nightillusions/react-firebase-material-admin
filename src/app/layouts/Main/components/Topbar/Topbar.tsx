@@ -6,15 +6,16 @@ import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React, { useState } from 'react';
 // import { Link as RouterLink } from 'react-router-dom';
-import { Link as RouterLink } from '@reach/router'
+import { Link as RouterLink } from '@reach/router';
 import { ITheme } from '../../../../theme';
+import { Auth } from '../../../../App';
 
 interface IProps {
   onSidebarOpen: () => void;
   className?: string;
 }
 
-const useStyles = makeStyles((theme:ITheme) => ({
+const useStyles = makeStyles((theme: ITheme) => ({
   root: {
     boxShadow: 'none'
   },
@@ -27,22 +28,17 @@ const useStyles = makeStyles((theme:ITheme) => ({
 }));
 
 const Topbar: React.FC<IProps> = ({ className, onSidebarOpen, ...rest }) => {
-
   const classes = useStyles();
 
   const [notifications] = useState([]);
 
+  const { signOut } = Auth.useContainer();
+
   return (
-    <AppBar
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <AppBar {...rest} className={clsx(classes.root, className)}>
       <Toolbar>
         <RouterLink to="/">
-          <img
-            alt="Logo"
-            src="/images/logos/logo--white.svg"
-          />
+          <img alt="Logo" src="/images/logos/logo--white.svg" />
         </RouterLink>
         <div className={classes.flexGrow} />
         <Hidden mdDown>
@@ -50,23 +46,19 @@ const Topbar: React.FC<IProps> = ({ className, onSidebarOpen, ...rest }) => {
             <Badge
               badgeContent={notifications.length}
               color="primary"
-              variant="dot"
-            >
+              variant="dot">
               <NotificationsIcon />
             </Badge>
           </IconButton>
           <IconButton
             className={classes.signOutButton}
             color="inherit"
-          >
+            onClick={signOut}>
             <InputIcon />
           </IconButton>
         </Hidden>
         <Hidden lgUp>
-          <IconButton
-            color="inherit"
-            onClick={onSidebarOpen}
-          >
+          <IconButton color="inherit" onClick={onSidebarOpen}>
             <MenuIcon />
           </IconButton>
         </Hidden>
