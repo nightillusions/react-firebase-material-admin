@@ -11,6 +11,10 @@ import {
 import { makeStyles } from "@material-ui/styles";
 import clsx from "clsx";
 import React, { useState } from "react";
+import { Auth } from "../../../../App";
+import { Redirect } from "@reach/router";
+import getFirstName from "../../../../../utils/getFirstName";
+import getLastName from "../../../../../utils/getLastName";
 
 interface IProps {
   className?: string;
@@ -21,17 +25,23 @@ const useStyles = makeStyles(() => ({
 }));
 
 const AccountDetails: React.FC<IProps> = ({ className, ...rest }) => {
+  const { user } = Auth.useContainer();
   const classes = useStyles();
 
-  const [values, setValues] = useState({
-    firstName: "Shen",
-    lastName: "Zhi",
-    email: "shen.zhi@devias.io",
-    phone: "",
-    state: "Alabama",
-    country: "USA"
-  });
+  if (!user) {
+    return <Redirect from="" to="/sign-out" noThrow />;
+  }
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [values, setValues] = useState({
+    firstName: user.displayName ? getFirstName(user.displayName) : "",
+    lastName: user.displayName ? getLastName(user.displayName) : "",
+    email: user.email,
+    phone: user.phoneNumber,
+    state: "",
+    country: ""
+  });
+  
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({
       ...values,

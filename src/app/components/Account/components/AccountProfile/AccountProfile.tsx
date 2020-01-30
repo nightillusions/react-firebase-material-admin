@@ -1,9 +1,21 @@
-import { Avatar, Button, Card, CardActions, CardContent, Divider, LinearProgress, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import clsx from "clsx";
-import moment from "moment";
-import React from "react";
-import { ITheme } from "../../../../theme";
+import {
+  Avatar,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Divider,
+  LinearProgress,
+  Typography
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
+import clsx from 'clsx';
+import moment from 'moment';
+import React from 'react';
+import { ITheme } from '../../../../theme';
+import { Auth } from '../../../../App';
+import { Redirect } from '@reach/router';
+import { getInitials } from '../../../../../utils';
 
 interface IProps {
   className?: string;
@@ -12,10 +24,10 @@ interface IProps {
 const useStyles = makeStyles((theme: ITheme) => ({
   root: {},
   details: {
-    display: "flex"
+    display: 'flex'
   },
   avatar: {
-    marginLeft: "auto",
+    marginLeft: 'auto',
     height: 110,
     width: 100,
     flexShrink: 0,
@@ -33,14 +45,19 @@ const useStyles = makeStyles((theme: ITheme) => ({
 
 const AccountProfile: React.FC<IProps> = ({ className, ...rest }) => {
   const classes = useStyles();
+  const { user } = Auth.useContainer();
 
-  const user = {
-    name: "Shen Zhi",
-    city: "Los Angeles",
-    country: "USA",
-    timezone: "GTM-7",
-    avatar: "/images/avatars/avatar_11.png"
+  if (!user) {
+    return <Redirect from="" to="/sign-out" noThrow />;
+  }
+
+  const handleRemovePicture = () => {
+    user.updateProfile({
+      photoURL: null
+    });
   };
+
+  const initials = getInitials(user.displayName || 'NOPE');
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
@@ -48,24 +65,27 @@ const AccountProfile: React.FC<IProps> = ({ className, ...rest }) => {
         <div className={classes.details}>
           <div>
             <Typography gutterBottom variant="h2">
-              John Doe
+              {user.displayName}
             </Typography>
             <Typography
               className={classes.locationText}
               color="textSecondary"
-              variant="body1"
-            >
-              {user.city}, {user.country}
+              variant="body1">
+              CITY, COUNTRY
             </Typography>
             <Typography
               className={classes.dateText}
               color="textSecondary"
-              variant="body1"
-            >
-              {moment().format("hh:mm A")} ({user.timezone})
+              variant="body1">
+              {moment().format('hh:mm A')} (TIMEZONE)
             </Typography>
           </div>
-          <Avatar className={classes.avatar} src={user.avatar} />
+          <Avatar
+            alt={user.displayName || undefined}
+            className={classes.avatar}
+            src={user.photoURL || undefined}>
+            {initials}
+          </Avatar>
         </div>
         <div className={classes.progress}>
           <Typography variant="body1">Profile Completeness: 70%</Typography>
@@ -77,7 +97,12 @@ const AccountProfile: React.FC<IProps> = ({ className, ...rest }) => {
         <Button className={classes.uploadButton} color="primary" variant="text">
           Upload picture
         </Button>
-        <Button variant="text">Remove picture</Button>
+        <Button
+          onClick={handleRemovePicture}
+          disabled={!user.photoURL}
+          variant="text">
+          Remove picture
+        </Button>
       </CardActions>
     </Card>
   );

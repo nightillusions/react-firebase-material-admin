@@ -5,6 +5,7 @@ import React from 'react';
 import { Link as RouterLink, Redirect } from '@reach/router';
 import { ITheme } from '../../../../../../theme';
 import { Auth } from '../../../../../../App';
+import { getInitials } from '../../../../../../../utils';
 
 interface IProps {
   className?: string;
@@ -34,12 +35,7 @@ const Profile: React.FC<IProps> = ({ className, ...rest }) => {
     return <Redirect from="" to="/sign-out" noThrow />;
   }
 
-  const initials =
-    user.displayName &&
-    user.displayName
-      .split(' ')
-      .map(name => name && name.substring(0, 1).toUpperCase())
-      .join('');
+  const initials = getInitials(user.displayName || 'NOPE');
 
   return (
     <div {...rest} className={clsx(classes.root, className)}>
