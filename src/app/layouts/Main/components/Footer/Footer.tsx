@@ -28,16 +28,15 @@ const Footer: React.FC<IProps> = ({ className, ...rest }) => {
         &copy;{' '}
         <Link
           component={RouterLink}
-          to="https://devias.io/"
+          to="https://jordin.eu"
           target="_blank"
         >
-          Devias IO
+          Pascal Jordin
         </Link>
-        . 2019
+        . 2020
       </Typography>
       <Typography variant="caption">
-        Created with love for the environment. By designers and developers who
-        love to work together in offices!
+        Feel free to use this React Firebase Biolerplate for your project
       </Typography>
     </div>
   );

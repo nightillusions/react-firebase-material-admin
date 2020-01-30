@@ -11,7 +11,7 @@ import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React from 'react';
 import { ITheme } from '../../../../theme';
-import { Profile, SidebarNav, UpgradePlan } from './components';
+import { Profile, SidebarNav } from './components';
 
 
 interface IProps {
@@ -108,7 +108,6 @@ const Sidebar:React.FC<IProps> = ({ open, variant, onClose, className, ...rest }
           className={classes.nav}
           pages={pages}
         />
-        <UpgradePlan />
       </div>
     </Drawer>
   );
