@@ -203,12 +203,17 @@ const SignUp: React.FC<{}> = () => {
       | React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault();
-    await firebase
+    const {user} = await firebase
       .auth()
       .createUserWithEmailAndPassword(
         String(formState.values['email']),
         String(formState.values['password'])
       );
+      if(user){
+        user.updateProfile({
+          displayName: `${formState.values['firstName']} ${formState.values['lastName']}`
+        })
+      }
     navigate('/');
   };
 
