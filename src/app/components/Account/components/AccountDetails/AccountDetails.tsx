@@ -1,20 +1,10 @@
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  Divider,
-  Grid,
-  TextField
-} from "@material-ui/core";
+import { Button, Card, CardActions, CardContent, CardHeader, Divider, Grid, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import clsx from "clsx";
 import React, { useState } from "react";
-import { Auth } from "../../../../App";
-import { Redirect } from "@reach/router";
 import getFirstName from "../../../../../utils/getFirstName";
 import getLastName from "../../../../../utils/getLastName";
+import { Auth } from "../../../../App";
 
 interface IProps {
   className?: string;
@@ -29,7 +19,7 @@ const AccountDetails: React.FC<IProps> = ({ className, ...rest }) => {
   const classes = useStyles();
 
   if (!user) {
-    return <Redirect from="" to="/sign-out" noThrow />;
+    return null;
   }
 
   // eslint-disable-next-line react-hooks/rules-of-hooks

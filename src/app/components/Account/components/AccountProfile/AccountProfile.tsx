@@ -1,21 +1,11 @@
-import {
-  Avatar,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Divider,
-  LinearProgress,
-  Typography
-} from '@material-ui/core';
+import { Avatar, Button, Card, CardActions, CardContent, Divider, LinearProgress, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import moment from 'moment';
 import React from 'react';
-import { ITheme } from '../../../../theme';
-import { Auth } from '../../../../App';
-import { Redirect } from '@reach/router';
 import { getInitials } from '../../../../../utils';
+import { Auth } from '../../../../App';
+import { ITheme } from '../../../../theme';
 
 interface IProps {
   className?: string;
@@ -48,7 +38,7 @@ const AccountProfile: React.FC<IProps> = ({ className, ...rest }) => {
   const { user } = Auth.useContainer();
 
   if (!user) {
-    return <Redirect from="" to="/sign-out" noThrow />;
+    return null;
   }
 
   const handleRemovePicture = () => {

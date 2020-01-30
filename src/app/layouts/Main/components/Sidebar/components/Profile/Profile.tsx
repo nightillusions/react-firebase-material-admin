@@ -1,11 +1,11 @@
 import { Avatar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import { Link as RouterLink } from '@reach/router';
 import clsx from 'clsx';
 import React from 'react';
-import { Link as RouterLink, Redirect } from '@reach/router';
-import { ITheme } from '../../../../../../theme';
-import { Auth } from '../../../../../../App';
 import { getInitials } from '../../../../../../../utils';
+import { Auth } from '../../../../../../App';
+import { ITheme } from '../../../../../../theme';
 
 interface IProps {
   className?: string;
@@ -32,7 +32,7 @@ const Profile: React.FC<IProps> = ({ className, ...rest }) => {
   const classes = useStyles();
 
   if (!user) {
-    return <Redirect from="" to="/sign-out" noThrow />;
+    return null;
   }
 
   const initials = getInitials(user.displayName || 'NOPE');
