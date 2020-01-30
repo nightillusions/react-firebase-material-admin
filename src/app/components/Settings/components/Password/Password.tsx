@@ -2,31 +2,39 @@ import { Button, Card, CardActions, CardContent, CardHeader, Divider, TextField 
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React, { useState } from 'react';
+import { Auth } from '../../../../App';
 
 interface IProps {
   className?: string;
 }
-
 
 const useStyles = makeStyles(() => ({
   root: {}
 }));
 
 const Password:React.FC<IProps> = ({ className, ...rest }) => {
-
+  const {user} = Auth.useContainer();
   const classes = useStyles();
-
+  
   const [values, setValues] = useState({
     password: '',
     confirm: ''
   });
-
+  
+  if (!user) {
+    return null;
+  }
+  
   const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
     setValues({
       ...values,
       [event.target.name]: event.target.value
     });
   };
+
+  const handleSavePassword = () => {
+    user.updatePassword(values.password)
+  }
 
   return (
     <Card
@@ -65,6 +73,8 @@ const Password:React.FC<IProps> = ({ className, ...rest }) => {
           <Button
             color="primary"
             variant="outlined"
+            onClick={handleSavePassword}
+            disabled={values.password !== values.confirm || !values.password}
           >
             Update
           </Button>
