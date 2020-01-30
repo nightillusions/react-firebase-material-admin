@@ -2,9 +2,9 @@ import { Avatar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React from 'react';
-// import { Link as RouterLink } from 'react-router-dom';
-import { Link as RouterLink } from '@reach/router'
+import { Link as RouterLink, Redirect } from '@reach/router';
 import { ITheme } from '../../../../../../theme';
+import { Auth } from '../../../../../../App';
 
 interface IProps {
   className?: string;
@@ -26,35 +26,35 @@ const useStyles = makeStyles((theme: ITheme) => ({
   }
 }));
 
-const Profile:React.FC<IProps> = ({ className, ...rest }) => {
-
+const Profile: React.FC<IProps> = ({ className, ...rest }) => {
+  const { user } = Auth.useContainer();
   const classes = useStyles();
 
-  const user = {
-    name: 'Shen Zhi',
-    avatar: '/images/avatars/avatar_11.png',
-    bio: 'Brain Director'
-  };
+  if (!user) {
+    return <Redirect from="" to="/sign-out" noThrow />;
+  }
+
+  const initials =
+    user.displayName &&
+    user.displayName
+      .split(' ')
+      .map(name => name && name.substring(0, 1).toUpperCase())
+      .join('');
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <Avatar
-        alt="Person"
+        alt={user.displayName || undefined}
         className={classes.avatar}
         component={RouterLink}
-        src={user.avatar}
-        to="/settings"
-      />
-      <Typography
-        className={classes.name}
-        variant="h4"
-      >
-        {user.name}
+        src={user.photoURL || undefined}
+        to="/settings">
+        {initials}
+      </Avatar>
+      <Typography className={classes.name} variant="h4">
+        {user.displayName}
       </Typography>
-      <Typography variant="body2">{user.bio}</Typography>
+      <Typography variant="body2">{user.email}</Typography>
     </div>
   );
 };
