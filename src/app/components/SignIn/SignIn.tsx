@@ -223,7 +223,7 @@ const SignIn: React.FC<IProps> = () => {
 
     await firebase
       .auth()
-      .createUserWithEmailAndPassword(
+      .signInWithEmailAndPassword(
         String(formState.values['email']),
         String(formState.values['password'])
       );
