@@ -14,7 +14,8 @@ import {
   Icons,
   Settings,
   SignUp,
-  SignIn
+  SignIn,
+  SignOut
 } from './components';
 import theme from './theme';
 import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
@@ -88,6 +89,12 @@ const App: React.FC<{}> = () => {
             path="/notfound"
             layout={MinimalLayout}
             component={NotFound}
+            publicPath
+          />
+          <RouteWithLayout
+            path="/sign-out"
+            layout={MinimalLayout}
+            component={SignOut}
             publicPath
           />
         </Router>

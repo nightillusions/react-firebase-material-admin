@@ -25,6 +25,7 @@ import {
   Facebook as FacebookIcon,
   Google as GoogleIcon
 } from '../../theme/icons';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 interface IOwnProps {
   className?: string;
@@ -161,7 +162,7 @@ const useStyles = makeStyles((theme: ITheme) => ({
 
 const SignIn: React.FC<IProps> = () => {
   const history = window.browserHistory;
-  const { user } = Auth.useContainer();
+  const { user, pending } = Auth.useContainer();
   const classes = useStyles();
   const signInWith = useSignInWith();
   const [formState, setFormState] = useState<IFormState>({
@@ -181,6 +182,10 @@ const SignIn: React.FC<IProps> = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formState.values]);
+
+  if (pending) {
+    return <LoadingSpinner />;
+  }
 
   if (user) {
     return <Redirect from="" to="/" noThrow />;
