@@ -19,25 +19,11 @@ import React, { useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { ITheme } from '../../../../theme';
 import { getInitials } from '../../../../../utils';
+import { IUser } from '../../../../models/User';
 
 interface IProps {
   className?: string;
   users: IUser[];
-}
-
-export interface IUser {
-  id: string;
-  name: string;
-  email: string;
-  avatarUrl: string;
-  createdAt: number;
-  phone: string;
-  address: {
-    country: string;
-    state: string;
-    city: string;
-    street: string;
-  };
 }
 
 const useStyles = makeStyles((theme: ITheme) => ({
@@ -112,6 +98,8 @@ const UsersTable: React.FC<IProps> = ({ className, users, ...rest }) => {
     setRowsPerPage(Number(event.target.value));
   };
 
+  const address = (user: IUser) => user.address && `${user.address.city}, ${user.address.state}, ${user.address.country}`
+
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
       <CardContent className={classes.content}>
@@ -155,16 +143,15 @@ const UsersTable: React.FC<IProps> = ({ className, users, ...rest }) => {
                     </TableCell>
                     <TableCell>
                       <div className={classes.nameContainer}>
-                        <Avatar className={classes.avatar} src={user.avatarUrl}>
-                          {getInitials(user.name)}
+                        <Avatar className={classes.avatar} src={user.avatarUrl || undefined}>
+                          {getInitials(`${user.firstName} ${user.lastName}`)}
                         </Avatar>
-                        <Typography variant="body1">{user.name}</Typography>
+                        <Typography variant="body1">{`${user.firstName} ${user.lastName}`}</Typography>
                       </div>
                     </TableCell>
                     <TableCell>{user.email}</TableCell>
                     <TableCell>
-                      {user.address.city}, {user.address.state},{' '}
-                      {user.address.country}
+                      {address(user)}
                     </TableCell>
                     <TableCell>{user.phone}</TableCell>
                     <TableCell>

@@ -16,25 +16,12 @@ const firebaseConfig = {
 };
 firebase.firestore.setLogLevel('debug');
 
-const Firebase = firebase.initializeApp(firebaseConfig);
+const FirebaseApp = firebase.initializeApp(firebaseConfig);
 
-Firebase.analytics();
-Firebase.performance();
+const analytics = FirebaseApp.analytics();
+const perf = FirebaseApp.performance();
 
-Firebase.firestore()
-  .enablePersistence()
-  .catch(err => {
-    console.log('Persistence disabled: ', err.code);
-    if (err.code === 'failed-precondition') {
-      // Multiple tabs open, persistence can only be enabled
-      // in one tab at a a time.
-      // ...
-    } else if (err.code === 'unimplemented') {
-      // The current browser does not support all of the
-      // features required to enable persistence
-      // ...
-    }
-  });
+const db = FirebaseApp.firestore();
 
 const FirebaseContext = React.createContext(null);
 const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -44,6 +31,9 @@ const twitterProvider = new firebase.auth.TwitterAuthProvider();
 const githubProvider = new firebase.auth.GithubAuthProvider();
 
 export {
+  db,
+  perf,
+  analytics,
   FirebaseContext,
   googleProvider,
   facebookProvider,
@@ -51,4 +41,4 @@ export {
   twitterProvider,
   githubProvider
 };
-export default Firebase;
+export default FirebaseApp;

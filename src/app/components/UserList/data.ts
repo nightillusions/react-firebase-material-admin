@@ -3,7 +3,8 @@ import {v4 as uuid} from 'uuid';
 export default [
   {
     id: uuid(),
-    name: 'Ekaterina Tankova',
+    firstName: 'Ekaterina',
+    lastName: 'Tankova',
     address: {
       country: 'USA',
       state: 'West Virginia',
@@ -17,7 +18,8 @@ export default [
   },
   {
     id: uuid(),
-    name: 'Cao Yu',
+    firstName: 'Cao',
+    lastName: 'Yu',
     address: {
       country: 'USA',
       state: 'Bristow',
@@ -31,7 +33,8 @@ export default [
   },
   {
     id: uuid(),
-    name: 'Alexa Richardson',
+    firstName: 'Alexa',
+    lastName: 'Richardson',
     address: {
       country: 'USA',
       state: 'Georgia',
@@ -45,7 +48,8 @@ export default [
   },
   {
     id: uuid(),
-    name: 'Anje Keizer',
+    firstName: 'Anje',
+    lastName: 'Keizer',
     address: {
       country: 'USA',
       state: 'Ohio',
@@ -59,7 +63,8 @@ export default [
   },
   {
     id: uuid(),
-    name: 'Clarke Gillebert',
+    firstName: 'Clarke',
+    lastName: 'Gillebert',
     address: {
       country: 'USA',
       state: 'Texas',
@@ -73,7 +78,8 @@ export default [
   },
   {
     id: uuid(),
-    name: 'Adam Denisov',
+    firstName: 'Adam',
+    lastName: 'Denisov',
     address: {
       country: 'USA',
       state: 'California',
@@ -87,7 +93,8 @@ export default [
   },
   {
     id: uuid(),
-    name: 'Ava Gregoraci',
+    firstName: 'Ava',
+    lastName: 'Gregoraci',
     address: {
       country: 'USA',
       state: 'California',
@@ -101,7 +108,8 @@ export default [
   },
   {
     id: uuid(),
-    name: 'Emilee Simchenko',
+    firstName: 'Emilee',
+    lastName: 'Simchenko',
     address: {
       country: 'USA',
       state: 'Nevada',
@@ -115,7 +123,8 @@ export default [
   },
   {
     id: uuid(),
-    name: 'Kwak Seong-Min',
+    firstName: 'Kwak',
+    lastName: 'Seong-Min',
     address: {
       country: 'USA',
       state: 'Michigan',
@@ -129,7 +138,8 @@ export default [
   },
   {
     id: uuid(),
-    name: 'Merrile Burgett',
+    firstName: 'Merrile',
+    lastName: 'Burgett',
     address: {
       country: 'USA',
       state: 'Utah',

@@ -1,22 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Link as RouterLink, navigate } from '@reach/router';
-import { History } from 'history';
-import validate from 'validate.js';
-import { makeStyles } from '@material-ui/styles';
-import {
-  Grid,
-  Button,
-  IconButton,
-  TextField,
-  Link,
-  FormHelperText,
-  Checkbox,
-  Typography
-} from '@material-ui/core';
+import { Button, Checkbox, FormHelperText, Grid, IconButton, Link, TextField, Typography } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { makeStyles } from '@material-ui/styles';
+import { Link as RouterLink, navigate } from '@reach/router';
+import firebase from 'firebase';
+import { History } from 'history';
+import React, { useEffect, useState } from 'react';
+import validate from 'validate.js';
+import { IUserTemplate } from '../../models/User';
 import { ITheme } from '../../theme';
 import { IFormState } from '../SignIn/SignIn';
-import firebase from 'firebase';
+import Users from '../../firestore/User';
 
 declare global {
   interface Window {
@@ -203,18 +196,34 @@ const SignUp: React.FC<{}> = () => {
       | React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault();
-    const {user} = await firebase
-      .auth()
-      .createUserWithEmailAndPassword(
-        String(formState.values['email']),
-        String(formState.values['password'])
-      );
-      if(user){
-        user.updateProfile({
+
+    try {
+      const {user: authUser} = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(
+          String(formState.values['email']),
+          String(formState.values['password'])
+        );
+
+      if(authUser){
+        authUser.updateProfile({
           displayName: `${formState.values['firstName']} ${formState.values['lastName']}`
         })
+        const user: IUserTemplate = {
+          id: authUser.uid,
+          email: authUser.email ? authUser.email : "",
+          firstName:  String(formState.values['firstName']),
+          lastName: String(formState.values['lastName']),
+          phone: null,
+          avatarUrl: authUser.photoURL
+        }
+        await Users.create(user)
       }
-    navigate('/');
+
+      navigate('/');
+    } catch (error) {
+      console.log(error.message)
+    }
   };
 
   const hasError = (field: string) =>
