@@ -13,7 +13,7 @@ import { RouteComponentProps } from "@reach/router";
 
 const useStyles = makeStyles(() => ({
   root: {
-    padding: "4px"
+    padding: "32px"
   }
 }));
 
