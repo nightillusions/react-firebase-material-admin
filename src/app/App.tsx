@@ -1,27 +1,15 @@
 import { ThemeProvider } from '@material-ui/styles';
-import { Router, Redirect } from '@reach/router';
-import React from 'react';
-import validate from 'validate.js';
-import './App.css';
-import {
-  Dashboard,
-  UserList,
-  RouteWithLayout,
-  Account,
-  NotFound,
-  ProductList,
-  Typography,
-  Icons,
-  Settings,
-  SignUp,
-  SignIn,
-  SignOut
-} from './components';
-import theme from './theme';
-import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
-import validators from '../utils/validators';
+import { Redirect, Router } from '@reach/router';
+import React, { ReactNode } from 'react';
 import { createContainer } from 'unstated-next';
+import validate from 'validate.js';
+import validators from '../utils/validators';
+import './App.css';
+import { Account, Dashboard, Icons, NotFound, ProductList, RouteWithLayout, Settings, SignIn, SignOut, SignUp, Typography, UserList } from './components';
 import useAuth from './hooks/useAuth';
+import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
+import theme from './theme';
+import { PATHS } from './paths';
 
 export const Auth = createContainer(useAuth);
 
@@ -32,67 +20,71 @@ validate.validators = {
   ...validators
 };
 
+const RouterComponent = ({ children }:React.PropsWithChildren<ReactNode> ) => {
+  return <>{children}</>;
+}
+
 const App: React.FC<{}> = () => {
   return (
     <ThemeProvider theme={theme}>
       <Auth.Provider>
-        <Router>
-          <Redirect from="/" to="/dashboard" noThrow />
+        <Router primary={false} component={RouterComponent}>
+          <Redirect from={PATHS.ROOT} to={PATHS.DASHBOARD} noThrow />
           <RouteWithLayout
-            path="/dashboard"
+            path={PATHS.DASHBOARD}
             layout={MainLayout}
             component={Dashboard}
           />
           <RouteWithLayout
-            path="/users"
+            path={PATHS.USERS}
             layout={MainLayout}
             component={UserList}
           />
           <RouteWithLayout
-            path="/products"
+            path={PATHS.PRODUCTS}
             layout={MainLayout}
             component={ProductList}
           />
           <RouteWithLayout
-            path="/typography"
+            path={PATHS.TYPOGRAPHY}
             layout={MainLayout}
             component={Typography}
           />
           <RouteWithLayout
-            path="/icons"
+            path={PATHS.ICONS}
             layout={MainLayout}
             component={Icons}
           />
           <RouteWithLayout
-            path="/account"
+            path={PATHS.ACCOUNT}
             layout={MainLayout}
             component={Account}
           />
           <RouteWithLayout
-            path="/settings"
+            path={PATHS.SETTINGS}
             layout={MainLayout}
             component={Settings}
           />
           <RouteWithLayout
-            path="/sign-up"
+            path={PATHS.SIGN_UP}
             layout={MinimalLayout}
             component={SignUp}
             publicPath
           />
           <RouteWithLayout
-            path="/sign-in"
+            path={PATHS.SIGN_IN}
             layout={MinimalLayout}
             component={SignIn}
             publicPath
           />
           <RouteWithLayout
-            path="/notfound"
+            path={PATHS.NOT_FOUND}
             layout={MinimalLayout}
             component={NotFound}
             publicPath
           />
           <RouteWithLayout
-            path="/sign-out"
+            path={PATHS.SIGN_OUT}
             layout={MinimalLayout}
             component={SignOut}
             publicPath
