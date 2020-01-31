@@ -5,14 +5,14 @@ import 'firebase/firestore';
 import React from 'react';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyD7vKFs37Lh7WaEzjRL_g0i-uYDkkv_9ZQ',
-  authDomain: 'trador-e5310.firebaseapp.com',
-  databaseURL: 'https://trador-e5310.firebaseio.com',
-  projectId: 'trador-e5310',
-  storageBucket: 'trador-e5310.appspot.com',
-  messagingSenderId: '721326177413',
-  appId: '1:721326177413:web:6d527c14e63e0649b5bdec',
-  measurementId: 'G-044QX56BXY'
+  apiKey: "AIzaSyBYYDESplkFGW3GMLjTPWK1i4MeRBVfqjE",
+  authDomain: "pushtrade-b3877.firebaseapp.com",
+  databaseURL: "https://pushtrade-b3877.firebaseio.com",
+  projectId: "pushtrade-b3877",
+  storageBucket: "pushtrade-b3877.appspot.com",
+  messagingSenderId: "187823055670",
+  appId: "1:187823055670:web:0124621ab3fdbff32e0997",
+  measurementId: "G-G7ZS6G43PN"
 };
 firebase.firestore.setLogLevel('debug');
 
