@@ -6,10 +6,8 @@ import firebase from 'firebase';
 import { History } from 'history';
 import React, { useEffect, useState } from 'react';
 import validate from 'validate.js';
-import { IUserTemplate } from '../../models/User';
 import { ITheme } from '../../theme';
 import { IFormState } from '../SignIn/SignIn';
-import Users from '../../firestore/User';
 
 declare global {
   interface Window {
@@ -209,15 +207,6 @@ const SignUp: React.FC<{}> = () => {
         authUser.updateProfile({
           displayName: `${formState.values['firstName']} ${formState.values['lastName']}`
         })
-        const user: IUserTemplate = {
-          id: authUser.uid,
-          email: authUser.email ? authUser.email : "",
-          firstName:  String(formState.values['firstName']),
-          lastName: String(formState.values['lastName']),
-          phone: null,
-          avatarUrl: authUser.photoURL
-        }
-        await Users.create(user)
       }
 
       navigate('/');
