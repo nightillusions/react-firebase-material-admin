@@ -31,6 +31,8 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: hosting-build
+      - name: Install TypeScript
+        run: npm install typescript -g
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
