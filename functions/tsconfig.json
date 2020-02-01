@@ -3,7 +3,7 @@
     "module": "commonjs",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
-    "outDir": "build",
+    "outDir": "lib",
     "rootDir": "src",
     "sourceMap": true,
     "strict": true,

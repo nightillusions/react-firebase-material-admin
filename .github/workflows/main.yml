@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: functions-build
-          path: build
+          path: lib
   deploy:
     name: Deploy
     needs: build
