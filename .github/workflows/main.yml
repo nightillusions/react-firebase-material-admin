@@ -11,14 +11,14 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
-      - name: Install Dependencies
+      - name: Install Hosting Dependencies
         run: npm install
-      - name: Build
+      - name: Build Hosting
         run: npm run build
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
-          name: build
+          name: hosting-build
           path: build
   deploy:
     name: Deploy
@@ -27,13 +27,13 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
-      - name: Download Artifact
+      - name: Download Hosting Artifact
         uses: actions/download-artifact@master
         with:
-          name: build
+          name: hosting-build
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy
+          args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
