@@ -2,7 +2,6 @@ import { Divider, Drawer } from '@material-ui/core';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ImageIcon from '@material-ui/icons/Image';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
 import PeopleIcon from '@material-ui/icons/People';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
@@ -10,6 +9,7 @@ import TextFieldsIcon from '@material-ui/icons/TextFields';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React from 'react';
+import { PATHS } from '../../../../paths';
 import { ITheme } from '../../../../theme';
 import { Profile, SidebarNav } from './components';
 
@@ -50,42 +50,37 @@ const Sidebar:React.FC<IProps> = ({ open, variant, onClose, className, ...rest }
   const pages = [
     {
       title: 'Dashboard',
-      href: '/dashboard',
+      href: PATHS.DASHBOARD,
       icon: <DashboardIcon />
     },
     {
       title: 'Users',
-      href: '/users',
+      href: PATHS.USERS,
       icon: <PeopleIcon />
     },
     {
       title: 'Products',
-      href: '/products',
+      href: PATHS.PRODUCTS,
       icon: <ShoppingBasketIcon />
     },
     {
-      title: 'Authentication',
-      href: '/sign-in',
-      icon: <LockOpenIcon />
-    },
-    {
       title: 'Typography',
-      href: '/typography',
+      href: PATHS.TYPOGRAPHY,
       icon: <TextFieldsIcon />
     },
     {
       title: 'Icons',
-      href: '/icons',
+      href: PATHS.ICONS,
       icon: <ImageIcon />
     },
     {
       title: 'Account',
-      href: '/account',
+      href: PATHS.ACCOUNT,
       icon: <AccountBoxIcon />
     },
     {
       title: 'Settings',
-      href: '/settings',
+      href: PATHS.SETTINGS,
       icon: <SettingsIcon />
     }
   ];
