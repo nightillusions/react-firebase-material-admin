@@ -20,15 +20,6 @@ jobs:
         with:
           name: build
           path: build
-      - name: Install Functions Dependencies
-        run: cd functions && npm install
-      - name: Build Functions
-        run: cd functions && npm run build
-      - name: Archive Functions Artifact
-        uses: actions/upload-artifact@master
-        with:
-          name: lib
-          path: functions/lib
   deploy:
     name: Deploy
     needs: build
@@ -40,10 +31,6 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: build
-      - name: Download Functions Artifact
-        uses: actions/download-artifact@master
-        with:
-          name: lib
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
