@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: functions-build
-          path: lib
+          path: functions/lib
   deploy:
     name: Deploy
     needs: build
@@ -40,8 +40,6 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: hosting-build
-      - name: CD into functions folder
-        run: cd functions
       - name: Download Functions Artifact
         uses: actions/download-artifact@master
         with:
