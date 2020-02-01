@@ -4,10 +4,10 @@ import createStoreUser from "./user/createStoreUser";
 import deleteStoreUser from "./user/deleteStoreUser";
 admin.initializeApp();
 
-export const createStoreUserEvent = functions.auth
+export const createStoreUserEvent = functions.region("europe-west1").auth
   .user()
   .onCreate(createStoreUser);
 
-export const deleteStoreUserEvent = functions.auth
+export const deleteStoreUserEvent = functions.region("europe-west1").auth
   .user()
   .onDelete(deleteStoreUser);
