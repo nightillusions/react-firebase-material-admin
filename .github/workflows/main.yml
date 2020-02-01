@@ -23,7 +23,7 @@ jobs:
       - name: Install Functions Dependencies
         run: cd functions && npm install
       - name: Build Functions
-        run: npm run build
+        run: cd functions && npm run build
       - name: Archive Functions Artifact
         uses: actions/upload-artifact@master
         with:
