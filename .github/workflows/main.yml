@@ -40,14 +40,10 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: build
-      - name: CD into Functions
-        run: cd functions
       - name: Download Functions Artifact
         uses: actions/download-artifact@master
         with:
           name: lib
-      - name: CD up
-        run: cd ..
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
