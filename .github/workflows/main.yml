@@ -18,7 +18,7 @@ jobs:
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
-          name: hosting-build
+          name: build
           path: build
       - name: Install Functions Dependencies
         run: cd functions && npm install
@@ -27,7 +27,7 @@ jobs:
       - name: Archive Functions Artifact
         uses: actions/upload-artifact@master
         with:
-          name: functions-build
+          name: functions/lib
           path: functions/lib
   deploy:
     name: Deploy
@@ -39,11 +39,11 @@ jobs:
       - name: Download Hosting Artifact
         uses: actions/download-artifact@master
         with:
-          name: hosting-build
+          name: build
       - name: Download Functions Artifact
         uses: actions/download-artifact@master
         with:
-          name: functions-build
+          name: functions/lib
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
