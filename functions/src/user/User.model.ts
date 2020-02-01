@@ -1,4 +1,4 @@
-import { User } from "firebase";
+import { UserRecord } from "firebase-functions/lib/providers/auth";
 
 export interface IUserTemplate {
 	id: string;
@@ -23,4 +23,4 @@ export interface IUserAddress {
   street: string;
 }
 
-export type IAppUser = IUser & User;
+export type IAppUser = IUser & UserRecord;
