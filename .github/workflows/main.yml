@@ -20,6 +20,15 @@ jobs:
         with:
           name: hosting-build
           path: build
+      - name: Install Functions Dependencies
+        run: cd functions && npm install
+      - name: Build Functions
+        run: npm run build
+      - name: Archive Functions Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: functions-build
+          path: build
   deploy:
     name: Deploy
     needs: build
@@ -31,8 +40,12 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: hosting-build
-      - name: Install TypeScript
-        run: npm install --save-dev typescript
+      - name: CD into functions folder
+        run: cd functions
+      - name: Download Functions Artifact
+        uses: actions/download-artifact@master
+        with:
+          name: functions-build
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
