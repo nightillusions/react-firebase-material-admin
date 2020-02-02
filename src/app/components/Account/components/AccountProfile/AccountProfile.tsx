@@ -1,4 +1,13 @@
-import { Avatar, Button, Card, CardActions, CardContent, Divider, LinearProgress, Typography } from '@material-ui/core';
+import {
+  Avatar,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Divider,
+  LinearProgress,
+  Typography
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import moment from 'moment';
@@ -7,6 +16,7 @@ import { getInitials } from '../../../../../utils';
 import { Auth } from '../../../../App';
 import { ITheme } from '../../../../theme';
 import getFullName from '../../../../../utils/getFullName';
+import EditAvatar from './EditAvatar';
 
 interface IProps {
   className?: string;
@@ -58,25 +68,31 @@ const AccountProfile: React.FC<IProps> = ({ className, ...rest }) => {
             <Typography gutterBottom variant="h2">
               {getFullName(user)}
             </Typography>
-            { user.address && <Typography
-              className={classes.locationText}
-              color="textSecondary"
-              variant="body1">
-              {`${user.address.city}, ${user.address.country}`}
-            </Typography>}
-            { user.timezone && <Typography
-              className={classes.dateText}
-              color="textSecondary"
-              variant="body1">
-              {moment().format('hh:mm A')} ({user.timezone})
-            </Typography>}
+            {user.address && (
+              <Typography
+                className={classes.locationText}
+                color="textSecondary"
+                variant="body1">
+                {`${user.address.city}, ${user.address.country}`}
+              </Typography>
+            )}
+            {user.timezone && (
+              <Typography
+                className={classes.dateText}
+                color="textSecondary"
+                variant="body1">
+                {moment().format('hh:mm A')} ({user.timezone})
+              </Typography>
+            )}
           </div>
-          <Avatar
-            alt={getFullName(user)}
-            className={classes.avatar}
-            src={user.avatarUrl || undefined}>
-            {initials}
-          </Avatar>
+          <EditAvatar className={classes.avatar}>
+            <Avatar
+              alt={getFullName(user)}
+              className={classes.avatar}
+              src={user.avatarUrl || undefined}>
+              {initials}
+            </Avatar>
+          </EditAvatar>
         </div>
         <div className={classes.progress}>
           <Typography variant="body1">Profile Completeness: 70%</Typography>

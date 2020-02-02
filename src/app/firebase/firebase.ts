@@ -3,6 +3,7 @@ import 'firebase/analytics';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/performance';
+import 'firebase/storage';
 import React from 'react';
 
 const firebaseConfig = {
@@ -22,6 +23,7 @@ const FirebaseApp = firebase.initializeApp(firebaseConfig);
 const analytics = firebase.analytics();
 const perf = firebase.performance();
 const db = firebase.firestore();
+const storage = firebase.storage().ref();
 
 const FirebaseContext = React.createContext(null);
 const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -32,6 +34,7 @@ const githubProvider = new firebase.auth.GithubAuthProvider();
 
 export {
   db,
+  storage,
   perf,
   analytics,
   FirebaseContext,

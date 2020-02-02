@@ -1,7 +1,7 @@
 import { auth, User } from 'firebase';
 import { useState, useEffect } from 'react';
-import FirebaseApp, { db } from '../firebase';
-import { COLLECTION } from '../firestore/Collections';
+import FirebaseApp, { db } from '../firebase/firebase';
+import { COLLECTION } from '../firebase/firestore/collections';
 import { IUser } from '../models/User.model';
 
 const useAuth = (loggedInFirebaseUser: User | null = null) => {

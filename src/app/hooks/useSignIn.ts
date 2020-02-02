@@ -5,7 +5,7 @@ import {
   microsoftProvider,
   twitterProvider,
   githubProvider
-} from '../firebase';
+} from '../firebase/firebase';
 
 const useSignInWith = () => {
   const google = () => firebase.auth().signInWithRedirect(googleProvider);
