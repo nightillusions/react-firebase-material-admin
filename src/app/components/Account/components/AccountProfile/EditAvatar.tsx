@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState, useMemo, useEffect } from 'react';
-import Dropzone, { useDropzone } from 'react-dropzone';
-import { Storage } from '../../../../firebase/storage/Storage';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { Auth } from '../../../../App';
 import Users from '../../../../firebase/firestore/User';
+import { Storage } from '../../../../firebase/storage/Storage';
 import { IUser } from '../../../../models/User.model';
 
 export interface IProps {
@@ -29,7 +28,7 @@ interface T extends File {
 }
 
 const EditAvatar: React.FC<IProps> = ({ className, children }) => {
-  const {user, authUser} = Auth.useContainer();
+  const { user } = Auth.useContainer();
   const [files, setFiles] = useState<T[]>([]);
   const {
     getRootProps,
@@ -40,7 +39,7 @@ const EditAvatar: React.FC<IProps> = ({ className, children }) => {
   } = useDropzone({
     multiple: false,
     accept: 'image/jpeg',
-    onDrop: acceptedFiles => {
+    onDrop: async acceptedFiles => {
       setFiles(
         acceptedFiles.map(file =>
           Object.assign(file, {
@@ -48,25 +47,27 @@ const EditAvatar: React.FC<IProps> = ({ className, children }) => {
           })
         )
       );
+      if (files.length && user) {
+        const avatarUrl = await Storage.uploadUserAvatar(
+          user.id,
+          files.find(Boolean) as File
+        );
+        const updatedUser: IUser = {
+          ...user,
+          avatarUrl
+        };
+        await Users.update(updatedUser);
+      }
     }
   });
 
   useEffect(
-    () => {
-      const load = async () => {
-        if (files.length && user) {
-          const avatarUrl = await Storage.uploadUserAvatar(user.id, files.find(Boolean) as File);
-          const updatedUser: IUser = {
-            ...user,
-            avatarUrl
-          }
-          await Users.update(updatedUser)
-          files.forEach(file => URL.revokeObjectURL(file.preview));
-        }
-      };
-      load();
+    () => () => {
+      if (files.length) {
+        files.forEach(file => URL.revokeObjectURL(file.preview));
+      }
     },
-    [files, user]
+    [files]
   );
 
   const style = useMemo(
