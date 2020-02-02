@@ -6,6 +6,7 @@ import React from 'react';
 import { getInitials } from '../../../../../utils';
 import { Auth } from '../../../../App';
 import { ITheme } from '../../../../theme';
+import getFullName from '../../../../../utils/getFullName';
 
 interface IProps {
   className?: string;
@@ -35,19 +36,19 @@ const useStyles = makeStyles((theme: ITheme) => ({
 
 const AccountProfile: React.FC<IProps> = ({ className, ...rest }) => {
   const classes = useStyles();
-  const { user } = Auth.useContainer();
+  const { user, authUser } = Auth.useContainer();
 
-  if (!user) {
+  if (!user || !authUser) {
     return null;
   }
 
   const handleRemovePicture = () => {
-    user.updateProfile({
+    authUser.updateProfile({
       photoURL: null
     });
   };
 
-  const initials = getInitials(user.displayName || 'NOPE');
+  const initials = getInitials(authUser.displayName || 'NOPE');
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
@@ -55,25 +56,25 @@ const AccountProfile: React.FC<IProps> = ({ className, ...rest }) => {
         <div className={classes.details}>
           <div>
             <Typography gutterBottom variant="h2">
-              {user.displayName}
+              {getFullName(user)}
             </Typography>
-            <Typography
+            { user.address && <Typography
               className={classes.locationText}
               color="textSecondary"
               variant="body1">
-              CITY, COUNTRY
-            </Typography>
-            <Typography
+              {`${user.address.city}, ${user.address.country}`}
+            </Typography>}
+            { user.timezone && <Typography
               className={classes.dateText}
               color="textSecondary"
               variant="body1">
-              {moment().format('hh:mm A')} (TIMEZONE)
-            </Typography>
+              {moment().format('hh:mm A')} ({user.timezone})
+            </Typography>}
           </div>
           <Avatar
-            alt={user.displayName || undefined}
+            alt={getFullName(user)}
             className={classes.avatar}
-            src={user.photoURL || undefined}>
+            src={user.avatarUrl || undefined}>
             {initials}
           </Avatar>
         </div>
@@ -89,7 +90,7 @@ const AccountProfile: React.FC<IProps> = ({ className, ...rest }) => {
         </Button>
         <Button
           onClick={handleRemovePicture}
-          disabled={!user.photoURL}
+          disabled={!user.avatarUrl}
           variant="text">
           Remove picture
         </Button>

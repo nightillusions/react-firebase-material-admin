@@ -1,27 +1,47 @@
 import { auth, User } from 'firebase';
-import { useState } from 'react';
-import FirebaseApp from '../firebase';
+import { useState, useEffect } from 'react';
+import FirebaseApp, { db } from '../firebase';
+import { COLLECTION } from '../firestore/Collections';
+import { IUser } from '../models/User';
 
-const useAuth = (firebaseUser: User | null = null) => {
-  const [user, setUser] = useState<User | null>(firebaseUser);
+const useAuth = (loggedInFirebaseUser: User | null = null) => {
+  const [user, setUser] = useState<IUser | null>(null);
+  const [authUser, setAuthUser] = useState<User | null>(loggedInFirebaseUser);
   const [pending, setPending] = useState(true);
   const signOut = () => auth().signOut();
-
-  FirebaseApp.auth().onAuthStateChanged(async (authUser: User | null) => {
-    if (authUser) {
+  
+  FirebaseApp.auth().onAuthStateChanged(async (firebaseUser: User | null) => {
+    if (firebaseUser) {
       // const token = await authUser.getIdToken(true);
       // console.log(`Bearer ${token}`);
-      setUser(authUser);
+
+      
+      setAuthUser(firebaseUser)
       setPending(false);
 
       // loadSignUpsSaga(store.dispatch)();
     } else {
       setUser(null);
+      setAuthUser(null)
       setPending(false);
     }
   });
 
-  return { user, pending, signOut };
+	useEffect(() => {
+    const load = async () => {
+      if(authUser){
+        const dbUser = await db.collection(COLLECTION.USERS).doc(authUser.uid).get() as any;
+        setUser({
+          ...dbUser.data()
+        });
+      } else {
+        setUser(null);
+      }
+    }
+    load();
+	}, [authUser]);
+
+  return { user, authUser, pending, signOut };
 };
 
 export default useAuth;

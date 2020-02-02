@@ -2,8 +2,6 @@ import { Button, Card, CardActions, CardContent, CardHeader, Divider, Grid, Text
 import { makeStyles } from "@material-ui/styles";
 import clsx from "clsx";
 import React, { useState } from "react";
-import getFirstName from "../../../../../utils/getFirstName";
-import getLastName from "../../../../../utils/getLastName";
 import { Auth } from "../../../../App";
 
 interface IProps {
@@ -15,21 +13,21 @@ const useStyles = makeStyles(() => ({
 }));
 
 const AccountDetails: React.FC<IProps> = ({ className, ...rest }) => {
-  const { user } = Auth.useContainer();
+  const { user, authUser } = Auth.useContainer();
   const classes = useStyles();
 
-  if (!user) {
+  if (!user || !authUser) {
     return null;
   }
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [values, setValues] = useState({
-    firstName: user.displayName ? getFirstName(user.displayName) : "",
-    lastName: user.displayName ? getLastName(user.displayName) : "",
+    firstName: user.firstName,
+    lastName: user.lastName,
     email: user.email,
-    phone: user.phoneNumber,
-    state: "",
-    country: ""
+    phone: user.phone || undefined,
+    state: user.address?.state || undefined,
+    country: user.address?.country || undefined
   });
   
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

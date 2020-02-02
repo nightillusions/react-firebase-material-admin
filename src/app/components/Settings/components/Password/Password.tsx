@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Password:React.FC<IProps> = ({ className, ...rest }) => {
-  const {user} = Auth.useContainer();
+  const {user, authUser} = Auth.useContainer();
   const classes = useStyles();
   
   const [values, setValues] = useState({
@@ -21,7 +21,7 @@ const Password:React.FC<IProps> = ({ className, ...rest }) => {
     confirm: ''
   });
   
-  if (!user) {
+  if (!user || !authUser) {
     return null;
   }
   
@@ -33,7 +33,7 @@ const Password:React.FC<IProps> = ({ className, ...rest }) => {
   };
 
   const handleSavePassword = () => {
-    user.updatePassword(values.password)
+    authUser.updatePassword(values.password)
   }
 
   return (

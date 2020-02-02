@@ -28,27 +28,27 @@ const useStyles = makeStyles((theme: ITheme) => ({
 }));
 
 const Profile: React.FC<IProps> = ({ className, ...rest }) => {
-  const { user } = Auth.useContainer();
+  const { user, authUser } = Auth.useContainer();
   const classes = useStyles();
 
-  if (!user) {
+  if (!user || !authUser) {
     return null;
   }
 
-  const initials = getInitials(user.displayName || 'NOPE');
+  const initials = getInitials(authUser.displayName || 'NOPE');
 
   return (
     <div {...rest} className={clsx(classes.root, className)}>
       <Avatar
-        alt={user.displayName || undefined}
+        alt={authUser.displayName || undefined}
         className={classes.avatar}
         component={RouterLink}
-        src={user.photoURL || undefined}
+        src={user.avatarUrl || undefined}
         to="/settings">
         {initials}
       </Avatar>
       <Typography className={classes.name} variant="h4">
-        {user.displayName}
+        {authUser.displayName}
       </Typography>
       <Typography variant="body2">{user.email}</Typography>
     </div>
