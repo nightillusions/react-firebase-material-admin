@@ -20,8 +20,12 @@ const rejectStyle = {
   borderColor: '#ff1744'
 };
 
+interface T extends File {
+  preview: string;
+}
+
 const EditAvatar: React.FC<IProps> = ({ className, children }) => {
-  const [files, setFiles] = useState<File[]>([]);
+  const [files, setFiles] = useState<T[]>([]);
   const {
     getRootProps,
     getInputProps,
