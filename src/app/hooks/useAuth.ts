@@ -28,17 +28,17 @@ const useAuth = (loggedInFirebaseUser: User | null = null) => {
   });
 
 	useEffect(() => {
-    const load = async () => {
       if(authUser){
-        const dbUser = await db.collection(COLLECTION.USERS).doc(authUser.uid).get() as any;
+      db.collection(COLLECTION.USERS).doc(authUser.uid).onSnapshot(async (doc: any)=>{
+        const user = doc.data();
         setUser({
-          ...dbUser.data()
+          avatarUrl: await user.avatarUrl,
+          ...user
         });
-      } else {
-        setUser(null);
-      }
+      });
+    } else {
+      setUser(null);
     }
-    load();
 	}, [authUser]);
 
   return { user, authUser, pending, signOut };

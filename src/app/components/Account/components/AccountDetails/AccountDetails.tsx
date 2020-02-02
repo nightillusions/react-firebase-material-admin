@@ -1,7 +1,7 @@
 import { Button, Card, CardActions, CardContent, CardHeader, Divider, Grid, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import clsx from "clsx";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Auth } from "../../../../App";
 
 interface IProps {
@@ -15,42 +15,38 @@ const useStyles = makeStyles(() => ({
 const AccountDetails: React.FC<IProps> = ({ className, ...rest }) => {
   const { user, authUser } = Auth.useContainer();
   const classes = useStyles();
+  const [values, setValues] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    state: "",
+    country: ""
+  });
+    
+  useEffect(()=>{
+    if(user){
+      setValues({
+        firstName: user.firstName || "",
+        lastName: user.lastName || "",
+        email: user.email || "",
+        phone: user.phone || "",
+        state: user.address?.state || "",
+        country: user.address?.country || ""
+      });
+    }
+  },[user])
+    
 
   if (!user || !authUser) {
     return null;
   }
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [values, setValues] = useState({
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
-    phone: user.phone || undefined,
-    state: user.address?.state || undefined,
-    country: user.address?.country || undefined
-  });
-  
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({
       ...values,
       [event.target.name]: event.target.value
     });
   };
-
-  const states = [
-    {
-      value: "alabama",
-      label: "Alabama"
-    },
-    {
-      value: "new-york",
-      label: "New York"
-    },
-    {
-      value: "san-francisco",
-      label: "San Francisco"
-    }
-  ];
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
@@ -111,23 +107,13 @@ const AccountDetails: React.FC<IProps> = ({ className, ...rest }) => {
             <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
-                label="Select State"
+                label="State"
                 margin="dense"
                 name="state"
                 onChange={handleChange}
-                required
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                SelectProps={{ native: true }}
                 value={values.state}
                 variant="outlined"
-              >
-                {states.map(option => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
+              />
             </Grid>
             <Grid item md={6} xs={12}>
               <TextField
