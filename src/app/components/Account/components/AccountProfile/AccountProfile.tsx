@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: ITheme) => ({
   },
   avatar: {
     marginLeft: 'auto',
-    height: 110,
+    height: 100,
     width: 100,
     flexShrink: 0,
     flexGrow: 0
