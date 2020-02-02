@@ -2,7 +2,7 @@ import { auth, User } from 'firebase';
 import { useState, useEffect } from 'react';
 import FirebaseApp, { db } from '../firebase';
 import { COLLECTION } from '../firestore/Collections';
-import { IUser } from '../models/User';
+import { IUser } from '../models/User.model';
 
 const useAuth = (loggedInFirebaseUser: User | null = null) => {
   const [user, setUser] = useState<IUser | null>(null);

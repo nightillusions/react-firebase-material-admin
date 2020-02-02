@@ -12,12 +12,14 @@ export interface IUserTemplate {
 export interface IUser extends IUserTemplate {
 	timezone?: string;
   address: IUserAddress | null;
+  updatedAt: number;
   createdAt: number;
 }
 
 export interface IUserAddress {
   country: string;
   state: string;
+  zip: string;
   city: string;
   street: string;
 }

@@ -2,6 +2,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/analytics';
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/performance';
 import React from 'react';
 
 const firebaseConfig = {
@@ -18,10 +19,9 @@ firebase.firestore.setLogLevel('debug');
 
 const FirebaseApp = firebase.initializeApp(firebaseConfig);
 
-const analytics = FirebaseApp.analytics();
-const perf = FirebaseApp.performance();
-
-const db = FirebaseApp.firestore();
+const analytics = firebase.analytics();
+const perf = firebase.performance();
+const db = firebase.firestore();
 
 const FirebaseContext = React.createContext(null);
 const googleProvider = new firebase.auth.GoogleAuthProvider();

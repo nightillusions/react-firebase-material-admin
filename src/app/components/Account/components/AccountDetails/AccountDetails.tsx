@@ -1,8 +1,10 @@
 import { Button, Card, CardActions, CardContent, CardHeader, Divider, Grid, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import clsx from "clsx";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Auth } from "../../../../App";
+import Users from "../../../../firestore/User";
+import { IUser } from "../../../../models/User.model";
 
 interface IProps {
   className?: string;
@@ -15,13 +17,17 @@ const useStyles = makeStyles(() => ({
 const AccountDetails: React.FC<IProps> = ({ className, ...rest }) => {
   const { user, authUser } = Auth.useContainer();
   const classes = useStyles();
+  const [pending, setPending] = useState(false);
   const [values, setValues] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
     state: "",
-    country: ""
+    country: "",
+    zip: "",
+    city: "",
+    street: ""
   });
     
   useEffect(()=>{
@@ -32,7 +38,10 @@ const AccountDetails: React.FC<IProps> = ({ className, ...rest }) => {
         email: user.email || "",
         phone: user.phone || "",
         state: user.address?.state || "",
-        country: user.address?.country || ""
+        country: user.address?.country || "",
+        zip: user.address?.zip || "",
+        city: user.address?.city || "",
+        street: user.address?.street || ""
       });
     }
   },[user])
@@ -47,6 +56,26 @@ const AccountDetails: React.FC<IProps> = ({ className, ...rest }) => {
       [event.target.name]: event.target.value
     });
   };
+
+  const handleSave = async () => {
+    setPending(true)
+    const updatedUser: IUser = {
+      ...user,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      phone: values.phone,
+      address:{
+        state: values.state,
+        country: values.country,
+        zip: values.zip,
+        city: values.city,
+        street: values.street
+      }
+    }
+    await Users.update(updatedUser);
+    setPending(false)
+  }
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
@@ -99,8 +128,40 @@ const AccountDetails: React.FC<IProps> = ({ className, ...rest }) => {
                 margin="dense"
                 name="phone"
                 onChange={handleChange}
-                type="number"
                 value={values.phone}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                fullWidth
+                label="Zip"
+                margin="dense"
+                name="zip"
+                onChange={handleChange}
+                value={values.zip}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                fullWidth
+                label="City"
+                margin="dense"
+                name="city"
+                onChange={handleChange}
+                value={values.city}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                fullWidth
+                label="Street"
+                margin="dense"
+                name="street"
+                onChange={handleChange}
+                value={values.street}
                 variant="outlined"
               />
             </Grid>
@@ -122,7 +183,6 @@ const AccountDetails: React.FC<IProps> = ({ className, ...rest }) => {
                 margin="dense"
                 name="country"
                 onChange={handleChange}
-                required
                 value={values.country}
                 variant="outlined"
               />
@@ -131,7 +191,7 @@ const AccountDetails: React.FC<IProps> = ({ className, ...rest }) => {
         </CardContent>
         <Divider />
         <CardActions>
-          <Button color="primary" variant="contained">
+          <Button color="primary" variant="contained" onClick={handleSave} disabled={pending}>
             Save details
           </Button>
         </CardActions>

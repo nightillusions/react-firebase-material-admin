@@ -19,7 +19,7 @@ import React, { useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { ITheme } from '../../../../theme';
 import { getInitials } from '../../../../../utils';
-import { IUser } from '../../../../models/User';
+import { IUser } from '../../../../models/User.model';
 
 interface IProps {
   className?: string;
