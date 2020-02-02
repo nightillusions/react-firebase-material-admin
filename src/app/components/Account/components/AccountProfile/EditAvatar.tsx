@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useMemo, useEffect } from 'react';
 import Dropzone, { useDropzone } from 'react-dropzone';
+import { Storage } from '../../../../firebase/storage/Storage';
+import { Auth } from '../../../../App';
+import Users from '../../../../firebase/firestore/User';
+import { IUser } from '../../../../models/User.model';
 
 export interface IProps {
   className?: string;
@@ -25,6 +29,7 @@ interface T extends File {
 }
 
 const EditAvatar: React.FC<IProps> = ({ className, children }) => {
+  const {user, authUser} = Auth.useContainer();
   const [files, setFiles] = useState<T[]>([]);
   const {
     getRootProps,
@@ -34,7 +39,7 @@ const EditAvatar: React.FC<IProps> = ({ className, children }) => {
     isDragReject
   } = useDropzone({
     multiple: false,
-    accept: 'image/*',
+    accept: 'image/jpeg',
     onDrop: acceptedFiles => {
       setFiles(
         acceptedFiles.map(file =>
@@ -47,11 +52,21 @@ const EditAvatar: React.FC<IProps> = ({ className, children }) => {
   });
 
   useEffect(
-    () => () => {
-      // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach(file => URL.revokeObjectURL(file.preview));
+    () => {
+      const load = async () => {
+        if (files.length && user) {
+          const avatarUrl = await Storage.uploadUserAvatar(user.id, files.find(Boolean) as File);
+          const updatedUser: IUser = {
+            ...user,
+            avatarUrl
+          }
+          await Users.update(updatedUser)
+          files.forEach(file => URL.revokeObjectURL(file.preview));
+        }
+      };
+      load();
     },
-    [files]
+    [files, user]
   );
 
   const style = useMemo(

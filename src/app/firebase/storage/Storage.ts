@@ -3,9 +3,9 @@ import { FOLDERS } from "./folders";
 import firebase from "firebase";
 
 export const Storage = {
-	uploadUserAvatar: async (file: File, metadata: any) => {
+	uploadUserAvatar: async (userId: string, file: File, metadata: any = {contentType: 'image/jpeg',}) => {
 		// Upload file and metadata to the object 'images/mountains.jpg'
-		const uploadTask = storage.child(`${FOLDERS.USERS}avatar.jpg`).put(file, metadata);
+		const uploadTask = storage.child(`${FOLDERS.USERS}${userId}/avatar.jpg`).put(file, metadata);
 		const {TaskEvent: {STATE_CHANGED},TaskState} = firebase.storage;
 
 		const complete = async () => {
@@ -53,6 +53,6 @@ export const Storage = {
 			}, 
 			complete
 		);
-		return await complete;
+		return (await uploadTask.snapshot.ref.getDownloadURL()) as string;
 	}
 }
