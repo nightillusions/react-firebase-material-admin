@@ -1,5 +1,4 @@
 import { Link,  Typography } from '@material-ui/core';
-import { Link as RouterLink } from '@reach/router'
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React from 'react';
@@ -27,16 +26,15 @@ const Footer: React.FC<IProps> = ({ className, ...rest }) => {
       <Typography variant="body1">
         &copy;{' '}
         <Link
-          component={RouterLink}
-          to="https://jordin.eu"
+          component="a"
+          href="https://jordin.eu"
           target="_blank"
         >
-          Pascal Jordin
-        </Link>
-        . 2020
+          nightillusions
+        </Link> 2020
       </Typography>
       <Typography variant="caption">
-        Feel free to use this React Firebase Biolerplate for your project
+        Feel free to use this React Firebase Boilerplate for your project
       </Typography>
     </div>
   );
