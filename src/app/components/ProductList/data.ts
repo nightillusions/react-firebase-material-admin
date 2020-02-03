@@ -1,5 +1,5 @@
 import {v4 as uuid} from 'uuid';
-import { IProduct } from './components/ProductCard/ProductCard';
+import { IProduct } from './ProductCard';
 
 export default [
   {

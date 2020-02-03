@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
-
-import { UsersToolbar, UsersTable } from './components';
-import mockData from './data';
-import { ITheme } from '../../theme';
 import { RouteComponentProps } from '@reach/router';
+import React, { useState } from 'react';
+import { ITheme } from '../../theme';
+import mockData from './data';
+import UsersTable from './UsersTable';
+import UsersToolbar from './UsersToolbar';
+
 
 const useStyles = makeStyles((theme:ITheme) => ({
   root: {

@@ -4,7 +4,7 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React from 'react';
-import { ITheme } from '../../../../theme';
+import { ITheme } from '../../theme';
 
 interface IProps {
   className?: string;

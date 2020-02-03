@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { Auth } from '../../../../App';
-import Users from '../../../../firebase/firestore/User';
-import { Storage } from '../../../../firebase/storage/Storage';
-import { IUser } from '../../../../models/User.model';
+import { Auth } from '../../App';
+import Users from '../../firebase/firestore/User';
+import { Storage } from '../../firebase/storage/Storage';
+import { IUser } from '../../models/User.model';
 
 export interface IProps {
   className?: string;

@@ -12,12 +12,12 @@ import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import moment from 'moment';
 import React from 'react';
-import { getInitials } from '../../../../../utils';
-import { Auth } from '../../../../App';
-import { ITheme } from '../../../../theme';
-import getFullName from '../../../../../utils/getFullName';
+import { getInitials } from '../../../utils';
+import { Auth } from '../../App';
+import { ITheme } from '../../theme';
+import getFullName from '../../../utils/getFullName';
 import EditAvatar from './EditAvatar';
-import Users from '../../../../firebase/firestore/User';
+import Users from '../../firebase/firestore/User';
 
 interface IProps {
   className?: string;

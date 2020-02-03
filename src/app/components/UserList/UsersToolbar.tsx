@@ -1,9 +1,9 @@
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
+import SearchInput from '../SearchInput';
 import React from 'react';
-import { ITheme } from '../../../../theme';
-import SearchInput from '../../../SearchInput';
+import { ITheme } from '../../theme';
 
 
 interface IProps {
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: ITheme) => ({
   }
 }));
 
-const ProductsToolbar: React.FC<IProps> = ({ className, ...rest }) => {
+const UsersToolbar: React.FC<IProps> = ({ className, ...rest }) => {
 
   const classes = useStyles();
 
@@ -49,18 +49,18 @@ const ProductsToolbar: React.FC<IProps> = ({ className, ...rest }) => {
           color="primary"
           variant="contained"
         >
-          Add product
+          Add user
         </Button>
       </div>
       <div className={classes.row}>
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search product"
-          onChange={()=>{""}}
+          placeholder="Search user"
+          onChange={():void=>{""}}
         />
       </div>
     </div>
   );
 };
 
-export default ProductsToolbar;
+export default UsersToolbar;

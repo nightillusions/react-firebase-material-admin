@@ -2,9 +2,9 @@ import { Button, Card, CardActions, CardContent, CardHeader, Divider, Grid, Text
 import { makeStyles } from "@material-ui/styles";
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
-import { Auth } from "../../../../App";
-import Users from "../../../../firebase/firestore/User";
-import { IUser } from "../../../../models/User.model";
+import { Auth } from "../../App";
+import Users from "../../firebase/firestore/User";
+import { IUser } from "../../models/User.model";
 
 interface IProps {
   className?: string;

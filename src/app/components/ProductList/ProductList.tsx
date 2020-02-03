@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/styles';
-import { IconButton, Grid, Typography } from '@material-ui/core';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { Grid, IconButton, Typography } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-
-import { ProductsToolbar, ProductCard } from './components';
-import mockData from './data';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { makeStyles } from '@material-ui/styles';
+import React, { useState } from 'react';
 import { ITheme } from '../../theme';
+import mockData from './data';
+import ProductCard from './ProductCard';
+import ProductsToolbar from './ProductsToolbar';
 
 const useStyles = makeStyles((theme: ITheme) => ({
   root: {

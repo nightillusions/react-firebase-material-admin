@@ -2,7 +2,7 @@ import { Button, Card, CardActions, CardContent, CardHeader, Divider, TextField 
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React, { useState } from 'react';
-import { Auth } from '../../../../App';
+import { Auth } from '../../App';
 
 interface IProps {
   className?: string;
