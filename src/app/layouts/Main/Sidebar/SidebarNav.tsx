@@ -53,7 +53,7 @@ const SidebarNav:React.FC<IProps> = ({ pages, className, ...rest }) => {
   
   const classes = useStyles();
   
-  // eslint-disable-next-line react/display-name
+  // eslint-disable-next-line react/display-name, @typescript-eslint/no-explicit-any
   const CustomLink = forwardRef((props: any, ref: React.Ref<HTMLDivElement>): JSX.Element => (
       <Match path={`${props.to}/*`}>
         {({match}) => (<div ref={ref} style={{ flexGrow: 1 }}>
