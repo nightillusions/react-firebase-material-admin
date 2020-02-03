@@ -9,37 +9,38 @@ const useAuth = (loggedInFirebaseUser: User | null = null) => {
   const [authUser, setAuthUser] = useState<User | null>(loggedInFirebaseUser);
   const [pending, setPending] = useState(true);
   const signOut = () => auth().signOut();
-  
+
   FirebaseApp.auth().onAuthStateChanged(async (firebaseUser: User | null) => {
     if (firebaseUser) {
       // const token = await authUser.getIdToken(true);
       // console.log(`Bearer ${token}`);
 
-      
-      setAuthUser(firebaseUser)
+      setAuthUser(firebaseUser);
       setPending(false);
 
       // loadSignUpsSaga(store.dispatch)();
     } else {
       setUser(null);
-      setAuthUser(null)
+      setAuthUser(null);
       setPending(false);
     }
   });
 
-	useEffect(() => {
-      if(authUser){
-      db.collection(COLLECTION.USERS).doc(authUser.uid).onSnapshot(async (doc: any)=>{
-        const user = doc.data();
-        setUser({
-          avatarUrl: await user.avatarUrl,
-          ...user
+  useEffect(() => {
+    if (authUser) {
+      db.collection(COLLECTION.USERS)
+        .doc(authUser.uid)
+        .onSnapshot(async (doc: any) => {
+          const user = doc.data();
+          setUser({
+            avatarUrl: (await user.avatarUrl) || '',
+            ...user
+          });
         });
-      });
     } else {
       setUser(null);
     }
-	}, [authUser]);
+  }, [authUser]);
 
   return { user, authUser, pending, signOut };
 };

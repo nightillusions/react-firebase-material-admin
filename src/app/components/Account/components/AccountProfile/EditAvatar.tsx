@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Auth } from '../../../../App';
@@ -23,13 +24,13 @@ const rejectStyle = {
   borderColor: '#ff1744'
 };
 
-interface T extends File {
-  preview: string;
-}
+// interface T extends File {
+//   preview: string;
+// }
 
 const EditAvatar: React.FC<IProps> = ({ className, children }) => {
   const { user } = Auth.useContainer();
-  const [files, setFiles] = useState<T[]>([]);
+  // const [files, setFiles] = useState<T[]>([]);
   const {
     getRootProps,
     getInputProps,
@@ -40,17 +41,17 @@ const EditAvatar: React.FC<IProps> = ({ className, children }) => {
     multiple: false,
     accept: 'image/jpeg',
     onDrop: async acceptedFiles => {
-      setFiles(
-        acceptedFiles.map(file =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file)
-          })
-        )
-      );
-      if (files.length && user) {
+      // setFiles(
+      //   acceptedFiles.map(file =>
+      //     Object.assign(file, {
+      //       preview: URL.createObjectURL(file)
+      //     })
+      //   )
+      // );
+      if (acceptedFiles.length && user) {
         const avatarUrl = await Storage.uploadUserAvatar(
           user.id,
-          files.find(Boolean) as File
+          acceptedFiles.find(Boolean) as File
         );
         const updatedUser: IUser = {
           ...user,
@@ -61,14 +62,14 @@ const EditAvatar: React.FC<IProps> = ({ className, children }) => {
     }
   });
 
-  useEffect(
-    () => () => {
-      if (files.length) {
-        files.forEach(file => URL.revokeObjectURL(file.preview));
-      }
-    },
-    [files]
-  );
+  // useEffect(
+  //   () => () => {
+  //     if (files.length) {
+  //       files.forEach(file => URL.revokeObjectURL(file.preview));
+  //     }
+  //   },
+  //   [files]
+  // );
 
   const style = useMemo(
     () => ({
