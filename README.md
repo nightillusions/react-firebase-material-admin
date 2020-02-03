@@ -1,44 +1,118 @@
+<h1>
+  Firebase React Admin Biolerplate <sup><i>incl. GitHub Actions deploment</i></sup><br>
+  <a href="https://discord.gg/uSv2EZ"><img src="https://img.shields.io/badge/chat-Discord-green.svg?style=social&amp;maxAge=3600" height="20"></a>
+</h1>
+
+**Firebase React Admin Biolerplate** is a project template (aka, boilerplate) for building
+modern, scalable web applications with React using serverless infrastructure
+provided by <a href="https://console.firebase.google.com/">Google Firebase</a>.
+It allows you to save time and build upon a solid foundation and design patterns.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Tech Stack
 
-In the project directory, you can run:
+- [Create React App][cra] (★ 76k) for development and test infrastructure (see [user guide][cradocs])
+- [Material UI][mui] (★ 54k) to reduce development time by integrating Google's [Material Design][material]
+- [Reach Router][router] (★ 6k) for declarative routing and client-side navigation
+- [TypeScript][ts] (★ 58k) TypeScript is a superset of JavaScript that compiles to clean JavaScript output.
+- [Google Cloud][gcp] & [Firebase][firebase] for serverless architecture - Cloud SQL, Cloud Functions, CDN hosting, file storage ([docs][fbdocs])
 
-### `yarn start`
+Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([ES2015][es2015]), [TypeScript][ts] and [React](https://reactjs.org/docs/).
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Prerequisites
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- [Node.js][nodejs] v10.15 or higher + [Yarn][yarn] v1.17 or higher &nbsp; (_HINT: On Mac install
+  them via [Brew][brew]_)
+- [VS Code][vc] editor (preferred) + [EditorConfig][vceditconfig],
+  [ESLint][vceslint], [Prettier][vcprettier], and [Babel JavaScript][vcjs] plug-ins
+- [Watchman][watchman] file watcher used by Relay Modern
+- [PostgreSQL][postgres] v9.6 or newer, only if you're planning to use a local db for development
 
-### `yarn test`
+### Getting Started
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Just clone the repo, update environment variables in `.env` and/or `.env.local` file, and start
+hacking:
 
-### `yarn build`
+```bash
+$ git clone git@github.com:nightillusions/pushtrade-app-web.git MyApp
+$ cd MyApp
+$ yarn                             # Installs dependencies
+$ yarn start                       # Compile the app and opens it in a browser with "live reload"
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Then open [http://localhost:3000/](http://localhost:3000/) to see your app.<br>
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+<p align='center'><img src='https://camo.githubusercontent.com/506a5a0a33aebed2bf0d24d3999af7f582b31808/687474703a2f2f692e696d6775722e636f6d2f616d794e66434e2e706e67' width='600' alt='npm start'></p>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### How to Deploy
 
-### `yarn eject`
+1. Copy `.github/workflows/main.yml`
+   ...
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+For more information refer to the [Deployment](https://github.com/nightillusions/pushtrade-app-web/wiki/Deploment)
+guide in the project's Wiki.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### How to Update
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+If you keep the original Git history after cloning this repo, you can always fetch and merge
+the recent updates back into your project by running:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+$ git remote add frab git@github.com:nightillusions/pushtrade-app-web.git
+$ git checkout master
+$ git fetch frab
+$ git merge frab/master
+$ yarn install
+```
 
-## Learn More
+\_NOTE: Try to merge as soon as the new changes land on the `master` branch in the upstream
+repository, otherwise your project may differ too much from the base/upstream repo.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Copyright © 2015-present Kriasoft. This source code is licensed under the MIT license found in
+the [LICENSE.txt](https://github.com/kriasoft/react-firebase-starter/blob/master/LICENSE.txt) file.
+
+---
+
+Made with ♥ by Pascal Jordin ([website](https://jordin.eu))
+[Get in touch!](https://jordin.eu)
+
+[cra]: https://github.com/facebook/create-react-app
+[cradocs]: https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md
+[mui]: https://material-ui.com/
+[material]: https://material.io/
+[router]: https://github.com/reach/router
+[firebase]: https://firebase.google.com/
+[html]: https://developer.mozilla.org/en-US/docs/Web/HTML
+[css]: https://developer.mozilla.org/en-US/docs/Web/CSS
+[js]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+[es2015]: http://babeljs.io/learn-es2015/
+[react]: https://facebook.github.io/react/
+[ts]: https://www.typescriptlang.org/
+[rfs]: https://github.com/kriasoft/react-firebase-starter
+[kriasoft]: https://github.com/kriasoft
+[telegram]: https://t.me/ReactStarter
+[psql]: https://www.postgresql.org/
+[cloudsql]: https://cloud.google.com/sql/
+[knex]: http://knexjs.org/
+[gqljs]: http://graphql.org/graphql-js/
+[relay]: http://facebook.github.io/relay/
+[passport]: http://www.passportjs.org/
+[relay]: https://facebook.github.io/relay/
+[gcp]: https://cloud.google.com/
+[fbdocs]: https://firebase.google.com/docs/web
+[history]: https://github.com/ReactTraining/history
+[nodejs]: https://nodejs.org/
+[yarn]: https://yarnpkg.com/
+[brew]: https://brew.sh/
+[wm]: https://facebook.github.io/watchman/
+[relaycompiler]: http://facebook.github.io/relay/docs/relay-compiler.html
+[vc]: https://code.visualstudio.com/
+[vceditconfig]: https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
+[vceslint]: https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
+[vcprettier]: https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+[vcjs]: https://marketplace.visualstudio.com/items?itemName=mgmcdermott.vscode-language-babel
+[watchman]: https://github.com/facebook/watchman
+[postgres]: https://www.postgresql.org/
