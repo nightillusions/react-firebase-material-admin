@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Link, Match } from '@reach/router';
 import clsx from 'clsx';
 import React, { forwardRef } from 'react';
-import { ITheme } from '../../../../../../theme';
+import { ITheme } from '../../../theme';
 
 interface IProps {
   className?: string;

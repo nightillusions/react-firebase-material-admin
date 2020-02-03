@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/styles";
 import { Link as RouterLink } from '@reach/router';
 import clsx from "clsx";
 import React from "react";
-import { ITheme } from '../../../../theme';
+import { ITheme } from '../../theme';
 
 
 interface IProps {

@@ -9,9 +9,10 @@ import TextFieldsIcon from '@material-ui/icons/TextFields';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React from 'react';
-import { PATHS } from '../../../../paths';
-import { ITheme } from '../../../../theme';
-import { Profile, SidebarNav } from './components';
+import { PATHS } from '../../../paths';
+import { ITheme } from '../../../theme';
+import Profile from './Profile';
+import SidebarNav from './SidebarNav';
 
 
 interface IProps {

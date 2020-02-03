@@ -7,9 +7,8 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 import TimelineIcon from '@material-ui/icons/Timeline';
 import { Link as RouterLink } from '@reach/router';
-import { ITheme } from '../../../../theme';
-import { Auth } from '../../../../App';
-
+import { ITheme } from '../../../theme';
+import { Auth } from '../../../App';
 interface IProps {
   onSidebarOpen: () => void;
   className?: string;

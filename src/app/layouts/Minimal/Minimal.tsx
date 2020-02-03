@@ -1,8 +1,8 @@
-import React, { ReactNode } from "react";
 import { makeStyles } from "@material-ui/styles";
 import clsx from "clsx";
+import React, { ReactNode } from "react";
+import Topbar from "./Topbar";
 
-import { Topbar } from "./components";
 
 interface IProps {
   children: ReactNode;

@@ -3,8 +3,9 @@ import { makeStyles, useTheme } from '@material-ui/styles';
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import { ITheme } from '../../theme';
-import { Footer, Sidebar, Topbar } from './components';
-
+import Topbar from './Topbar';
+import Sidebar from './Sidebar';
+import Footer from './Footer';
 
 interface IProps {
   className?: string;

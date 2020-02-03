@@ -3,9 +3,9 @@ import { makeStyles } from '@material-ui/styles';
 import { Link as RouterLink } from '@reach/router';
 import clsx from 'clsx';
 import React from 'react';
-import { getInitials } from '../../../../../../../utils';
-import { Auth } from '../../../../../../App';
-import { ITheme } from '../../../../../../theme';
+import { ITheme } from '../../../theme';
+import { Auth } from '../../../App';
+import { getInitials } from '../../../../utils';
 
 interface IProps {
   className?: string;
