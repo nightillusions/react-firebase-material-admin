@@ -17,6 +17,7 @@ import { Auth } from '../../../../App';
 import { ITheme } from '../../../../theme';
 import getFullName from '../../../../../utils/getFullName';
 import EditAvatar from './EditAvatar';
+import Users from '../../../../firebase/firestore/User';
 
 interface IProps {
   className?: string;
@@ -29,10 +30,17 @@ const useStyles = makeStyles((theme: ITheme) => ({
   },
   avatar: {
     marginLeft: 'auto',
-    height: 100,
-    width: 100,
+    height: 105,
+    width: 105,
     flexShrink: 0,
-    flexGrow: 0
+    flexGrow: 0,
+    borderRadius: "50%",
+    boxShadow: "0 0 0 2px transparent",
+    "&:hover": {
+      cursor: "pointer",
+      overflow: "hidden",
+      boxShadow: `0 0 0 2px ${theme.palette.primary.main}`
+    }
   },
   progress: {
     marginTop: theme.spacing(2)
@@ -41,7 +49,14 @@ const useStyles = makeStyles((theme: ITheme) => ({
     marginRight: theme.spacing(2)
   },
   locationText: {},
-  dateText: {}
+  dateText: {},
+  avatarButtons: {
+    display: "flex",
+    padding: "8px",
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexDirection: "row-reverse"
+  }
 }));
 
 const AccountProfile: React.FC<IProps> = ({ className, ...rest }) => {
@@ -52,13 +67,16 @@ const AccountProfile: React.FC<IProps> = ({ className, ...rest }) => {
     return null;
   }
 
-  const handleRemovePicture = () => {
-    authUser.updateProfile({
-      photoURL: null
+  const handleRemovePicture = async () => {
+    await Users.update({
+      ...user,
+      avatarUrl: null
     });
   };
 
   const initials = getInitials(authUser.displayName || 'NOPE');
+
+  const complettness = Math.round((Object.values(user).filter(String).length / Object.keys(user).length) * 100);
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
@@ -95,15 +113,12 @@ const AccountProfile: React.FC<IProps> = ({ className, ...rest }) => {
           </EditAvatar>
         </div>
         <div className={classes.progress}>
-          <Typography variant="body1">Profile Completeness: 70%</Typography>
-          <LinearProgress value={70} variant="determinate" />
+            <Typography variant="body1">Profile Completeness: {complettness}%</Typography>
+          <LinearProgress value={complettness} variant="determinate" />
         </div>
       </CardContent>
       <Divider />
-      <CardActions>
-        <Button className={classes.uploadButton} color="primary" variant="text">
-          Upload picture
-        </Button>
+      <CardActions className={classes.avatarButtons}>
         <Button
           onClick={handleRemovePicture}
           disabled={!user.avatarUrl}

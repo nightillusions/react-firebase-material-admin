@@ -33,7 +33,8 @@ const EditAvatar: React.FC<IProps> = ({ className, children }) => {
     isDragReject
   } = useDropzone({
     multiple: false,
-    accept: 'image/jpeg',
+    accept: 'image/jpeg, image/png',
+    maxSize: 2000000,
     onDrop: async acceptedFiles => {
       if (acceptedFiles.length && user) {
         const avatarUrl = await Storage.uploadUserAvatar(
