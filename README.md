@@ -14,6 +14,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 - [Create React App][cra] (★ 76k) for development and test infrastructure (see [user guide][cradocs])
 - [Material UI][mui] (★ 54k) to reduce development time by integrating Google's [Material Design][material]
+- [React Dashboard][mui] (★ 2k) Free React Dashboard made with Material UI’s components
 - [Reach Router][router] (★ 6k) for declarative routing and client-side navigation
 - [TypeScript][ts] (★ 58k) TypeScript is a superset of JavaScript that compiles to clean JavaScript output.
 - [Google Cloud][gcp] & [Firebase][firebase] for serverless architecture - Cloud SQL, Cloud Functions, CDN hosting, file storage ([docs][fbdocs])
@@ -82,6 +83,7 @@ Made with ♥ by Pascal Jordin ([website](https://jordin.eu))
 [cra]: https://github.com/facebook/create-react-app
 [cradocs]: https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md
 [mui]: https://material-ui.com/
+[rmd]: https://github.com/devias-io/react-material-dashboard
 [material]: https://material.io/
 [router]: https://github.com/reach/router
 [firebase]: https://firebase.google.com/
