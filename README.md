@@ -37,7 +37,7 @@ Just clone the repo, update environment variables in `.env` and/or `.env.local` 
 hacking:
 
 ```bash
-$ git clone git@github.com:nightillusions/pushtrade-app-web.git MyApp
+$ git clone git@github.com:nightillusions/react-firebase-material-admin.git MyApp
 $ cd MyApp
 $ yarn                             # Installs dependencies
 $ yarn start                       # Compile the app and opens it in a browser with "live reload"
@@ -52,7 +52,7 @@ Then open [http://localhost:3000/](http://localhost:3000/) to see your app.<br>
 1. Copy `.github/workflows/main.yml`
    ...
 
-For more information refer to the [Deployment](https://github.com/nightillusions/pushtrade-app-web/wiki/Deployment)
+For more information refer to the [Deployment](https://github.com/nightillusions/react-firebase-material-admin/wiki/Deployment)
 guide in the project's Wiki.
 
 ### How to Update
@@ -61,7 +61,7 @@ If you keep the original Git history after cloning this repo, you can always fet
 the recent updates back into your project by running:
 
 ```bash
-$ git remote add frab git@github.com:nightillusions/pushtrade-app-web.git
+$ git remote add frab git@github.com:nightillusions/react-firebase-material-admin.git
 $ git checkout master
 $ git fetch frab
 $ git merge frab/master

@@ -54,7 +54,7 @@ const Topbar: React.FC<IProps> = ({ className, onSidebarOpen, ...rest }) => {
           color="primary"
           startIcon={<TimelineIcon />}
         >
-          PushTrade
+          React Firebase Material Admin
         </Logo>
         </RouterLink>
         <div className={classes.flexGrow} />

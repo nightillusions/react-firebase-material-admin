@@ -46,7 +46,7 @@ const Topbar: React.FC<IProps> = ({ className, ...rest }) => {
           color="primary"
           startIcon={<TimelineIcon />}
         >
-          PushTrade
+          React Firebase Material Admin
         </Logo>
         </RouterLink>
       </Toolbar>
