@@ -52,7 +52,7 @@ Then open [http://localhost:3000/](http://localhost:3000/) to see your app.<br>
 1. Copy `.github/workflows/main.yml`
    ...
 
-For more information refer to the [Deployment](https://github.com/nightillusions/pushtrade-app-web/wiki/Deploment)
+For more information refer to the [Deployment](https://github.com/nightillusions/pushtrade-app-web/wiki/Deployment)
 guide in the project's Wiki.
 
 ### How to Update
