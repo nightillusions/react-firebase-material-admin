@@ -7,14 +7,14 @@ import 'firebase/storage';
 import React from 'react';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBYYDESplkFGW3GMLjTPWK1i4MeRBVfqjE",
-  authDomain: "pushtrade-b3877.firebaseapp.com",
-  databaseURL: "https://pushtrade-b3877.firebaseio.com",
-  projectId: "pushtrade-b3877",
-  storageBucket: "pushtrade-b3877.appspot.com",
-  messagingSenderId: "187823055670",
-  appId: "1:187823055670:web:0124621ab3fdbff32e0997",
-  measurementId: "G-G7ZS6G43PN"
+  apiKey: 'AIzaSyDbsHH_ztkk61xDQP9weQtLRE3SNJDNcHw',
+  authDomain: 'react-firebase-material-admin.firebaseapp.com',
+  databaseURL: 'https://react-firebase-material-admin.firebaseio.com',
+  projectId: 'react-firebase-material-admin',
+  storageBucket: 'react-firebase-material-admin.appspot.com',
+  messagingSenderId: '502279795075',
+  appId: '1:502279795075:web:d7adad030519ea1f66c6b6',
+  measurementId: 'G-PQWP4BWECP'
 };
 firebase.firestore.setLogLevel('debug');
 
