@@ -14,7 +14,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 - [Create React App][cra] (★ 76k) for development and test infrastructure (see [user guide][cradocs])
 - [Material UI][mui] (★ 54k) to reduce development time by integrating Google's [Material Design][material]
-- [React Dashboard][mui] (★ 2k) Free React Dashboard made with Material UI’s components
+- [React Dashboard][rmd] (★ 2k) Free React Dashboard made with Material UI’s components
 - [Reach Router][router] (★ 6k) for declarative routing and client-side navigation
 - [React Dropzone][dropzone] (★ 7k) Simple React hook to create a HTML5-compliant drag'n'drop zone for files.
 - [TypeScript][ts] (★ 58k) TypeScript is a superset of JavaScript that compiles to clean JavaScript output.
