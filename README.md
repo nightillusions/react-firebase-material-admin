@@ -1,5 +1,5 @@
 <h1>
-  Firebase React Admin Biolerplate <sup><i>incl. GitHub Actions deploment</i></sup><br>
+  Firebase React Admin Biolerplate <sup><i>incl. GitHub Actions deployment</i></sup><br>
   <a href="https://discord.gg/uSv2EZ"><img src="https://img.shields.io/badge/chat-Discord-green.svg?style=social&amp;maxAge=3600" height="20"></a>
 </h1>
 
