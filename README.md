@@ -47,9 +47,6 @@ Then open [http://localhost:3000/](http://localhost:3000/) to see your app.<br>
 
 ### How to Deploy
 
-1. Copy `.github/workflows/main.yml`
-   ...
-
 For more information refer to the [Deployment](https://github.com/nightillusions/react-firebase-material-admin/wiki/Deployment)
 guide in the project's Wiki.
 
