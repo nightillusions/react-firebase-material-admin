@@ -7,14 +7,14 @@ import 'firebase/storage';
 import React from 'react';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDbsHH_ztkk61xDQP9weQtLRE3SNJDNcHw',
-  authDomain: 'react-firebase-material-admin.firebaseapp.com',
-  databaseURL: 'https://react-firebase-material-admin.firebaseio.com',
-  projectId: 'react-firebase-material-admin',
-  storageBucket: 'react-firebase-material-admin.appspot.com',
-  messagingSenderId: '502279795075',
-  appId: '1:502279795075:web:d7adad030519ea1f66c6b6',
-  measurementId: 'G-PQWP4BWECP'
+  apiKey: 'AIzaSyD2cl79N0RiukMK9lU6atkL-wljQZYnmWc',
+  authDomain: 'react-firebase-material-f3cba.firebaseapp.com',
+  databaseURL: 'https://react-firebase-material-f3cba.firebaseio.com',
+  projectId: 'react-firebase-material-f3cba',
+  storageBucket: 'react-firebase-material-f3cba.appspot.com',
+  messagingSenderId: '452104680681',
+  appId: '1:452104680681:web:c16518c195d96c81302c78',
+  measurementId: 'G-35YXC4J7TY'
 };
 firebase.firestore.setLogLevel('debug');
 
