@@ -24,12 +24,10 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 
 ### Prerequisites
 
-- [Node.js][nodejs] v10.15 or higher + [Yarn][yarn] v1.17 or higher &nbsp; (_HINT: On Mac install
+- [Node.js][nodejs] v12.13 or higher + [Yarn][yarn] v1.21.1 or higher &nbsp; (_HINT: On Mac install
   them via [Brew][brew]_)
 - [VS Code][vc] editor (preferred) + [EditorConfig][vceditconfig],
-  [ESLint][vceslint], [Prettier][vcprettier], and [Babel JavaScript][vcjs] plug-ins
-- [Watchman][watchman] file watcher used by Relay Modern
-- [PostgreSQL][postgres] v9.6 or newer, only if you're planning to use a local db for development
+  [ESLint][vceslint] and [Prettier][vcprettier] plug-ins
 
 ### Getting Started
 
