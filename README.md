@@ -68,13 +68,13 @@ repository, otherwise your project may differ too much from the base/upstream re
 
 ### License
 
-Copyright © 2015-present Kriasoft. This source code is licensed under the MIT license found in
-the [LICENSE.txt](https://github.com/kriasoft/react-firebase-starter/blob/master/LICENSE.txt) file.
+Copyright © 2020 Pascal Jordin. This source code is licensed under the MIT license found in
+the [LICENSE.txt](https://github.com/nightillusions/react-firebase-material-admin/blob/master/LICENSE.txt) file.
 
 ---
 
 Made with ♥ by Pascal Jordin ([website](https://jordin.eu))
-[Get in touch!](https://jordin.eu)
+[Get in touch!](https://discord.gg/7EWVsCx)
 
 [cra]: https://github.com/facebook/create-react-app
 [cradocs]: https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md
@@ -90,8 +90,6 @@ Made with ♥ by Pascal Jordin ([website](https://jordin.eu))
 [react]: https://facebook.github.io/react/
 [dropzone]: https://react-dropzone.js.org/
 [ts]: https://www.typescriptlang.org/
-[rfs]: https://github.com/kriasoft/react-firebase-starter
-[kriasoft]: https://github.com/kriasoft
 [telegram]: https://t.me/ReactStarter
 [psql]: https://www.postgresql.org/
 [cloudsql]: https://cloud.google.com/sql/
