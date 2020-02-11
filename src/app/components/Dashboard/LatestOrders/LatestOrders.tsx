@@ -12,17 +12,21 @@ import {
   TableRow,
   TableSortLabel,
   Tooltip
-} from "@material-ui/core";
-import ArrowRightIcon from "@material-ui/icons/ArrowRight";
-import { makeStyles } from "@material-ui/styles";
-import clsx from "clsx";
-import StatusBullet from "../../StatusBullet";
-import moment from "moment";
-import React, { useState } from "react";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import { ITheme } from "../../../theme";
-import mockData from "./data";
-import { StatusBulletSize, StatusBulletColor } from "../../StatusBullet/StatusBullet";
+} from '@material-ui/core';
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import { makeStyles } from '@material-ui/styles';
+import clsx from 'clsx';
+import moment from 'moment';
+import React, { useState } from 'react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import { ITheme } from '../../../theme';
+import StatusBullet from '../../StatusBullet';
+import {
+  StatusBulletColor,
+  StatusBulletSize
+} from '../../StatusBullet/StatusBullet';
+import mockData from './data';
 
 interface IProps {
   className?: string;
@@ -37,14 +41,14 @@ const useStyles = makeStyles((theme: ITheme) => ({
     minWidth: 800
   },
   statusContainer: {
-    display: "flex",
-    alignItems: "center"
+    display: 'flex',
+    alignItems: 'center'
   },
   status: {
     marginRight: theme.spacing(1)
   },
   actions: {
-    justifyContent: "flex-end"
+    justifyContent: 'flex-end'
   }
 }));
 
@@ -96,7 +100,7 @@ const LatestOrders: React.FC<IProps> = ({ className, ...rest }) => {
                     <TableCell>{order.ref}</TableCell>
                     <TableCell>{order.customer.name}</TableCell>
                     <TableCell>
-                      {moment(order.createdAt).format("DD/MM/YYYY")}
+                      {moment(order.createdAt).format('DD/MM/YYYY')}
                     </TableCell>
                     <TableCell>
                       <div className={classes.statusContainer}>

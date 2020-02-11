@@ -17,9 +17,10 @@ import clsx from 'clsx';
 import moment from 'moment';
 import React, { useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { ITheme } from '../../theme';
+import 'react-perfect-scrollbar/dist/css/styles.css';
 import { getInitials } from '../../../utils';
 import { IUser } from '../../models/User.model';
+import { ITheme } from '../../theme';
 
 interface IProps {
   className?: string;
@@ -98,7 +99,9 @@ const UsersTable: React.FC<IProps> = ({ className, users, ...rest }) => {
     setRowsPerPage(Number(event.target.value));
   };
 
-  const address = (user: IUser) => user.address && `${user.address.city}, ${user.address.state}, ${user.address.country}`
+  const address = (user: IUser) =>
+    user.address &&
+    `${user.address.city}, ${user.address.state}, ${user.address.country}`;
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
@@ -143,16 +146,16 @@ const UsersTable: React.FC<IProps> = ({ className, users, ...rest }) => {
                     </TableCell>
                     <TableCell>
                       <div className={classes.nameContainer}>
-                        <Avatar className={classes.avatar} src={user.avatarUrl || undefined}>
+                        <Avatar
+                          className={classes.avatar}
+                          src={user.avatarUrl || undefined}>
                           {getInitials(`${user.firstName} ${user.lastName}`)}
                         </Avatar>
                         <Typography variant="body1">{`${user.firstName} ${user.lastName}`}</Typography>
                       </div>
                     </TableCell>
                     <TableCell>{user.email}</TableCell>
-                    <TableCell>
-                      {address(user)}
-                    </TableCell>
+                    <TableCell>{address(user)}</TableCell>
                     <TableCell>{user.phone}</TableCell>
                     <TableCell>
                       {moment(user.createdAt).format('DD/MM/YYYY')}
