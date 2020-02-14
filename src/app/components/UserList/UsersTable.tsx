@@ -10,17 +10,23 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Typography
+  Typography,
+  Drawer,
+  Grid,
+  Button
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import moment from 'moment';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { getInitials } from '../../../utils';
 import { IUser } from '../../models/User.model';
 import { ITheme } from '../../theme';
+import ClearIcon from '@material-ui/icons/Clear';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import DoneIcon from '@material-ui/icons/Done';
 
 interface IProps {
   className?: string;
@@ -28,7 +34,9 @@ interface IProps {
 }
 
 const useStyles = makeStyles((theme: ITheme) => ({
-  root: {},
+  root: {
+    padding: theme.spacing(3)
+  },
   content: {
     padding: 0
   },
@@ -45,6 +53,11 @@ const useStyles = makeStyles((theme: ITheme) => ({
   actions: {
     justifyContent: 'flex-end'
   },
+  selectedMenuActions: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center'
+  },
   tableRow: {}
 }));
 
@@ -54,6 +67,15 @@ const UsersTable: React.FC<IProps> = ({ className, users, ...rest }) => {
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
   const [page, setPage] = useState<number>(0);
+  const [openSelectMenu, setOpenSelectMenu] = useState<boolean>(
+    Boolean(selectedUsers.length)
+  );
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, users.length - page * rowsPerPage);
+
+    useEffect(() => {
+      setOpenSelectMenu(Boolean(selectedUsers.length));
+    }, [selectedUsers]);
 
   const handleSelectAll = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -66,44 +88,67 @@ const UsersTable: React.FC<IProps> = ({ className, users, ...rest }) => {
   };
 
   const handleSelectOne = (id: string): (() => void) => (): void => {
-    const selectedIndex = selectedUsers.indexOf(id);
-
-    if (selectedIndex === -1) {
-      setSelectedUsers(selectedUsers.concat(selectedUsers, id));
-    } else if (selectedIndex === 0) {
-      setSelectedUsers(selectedUsers.concat(selectedUsers.slice(1)));
-    } else if (selectedIndex === selectedUsers.length - 1) {
-      setSelectedUsers(selectedUsers.concat(selectedUsers.slice(0, -1)));
-    } else if (selectedIndex > 0) {
-      setSelectedUsers(
-        selectedUsers.concat(
-          selectedUsers.slice(0, selectedIndex),
-          selectedUsers.slice(selectedIndex + 1)
-        )
-      );
+    if (!selectedUsers.includes(id)) {
+      setSelectedUsers([...selectedUsers, id]);
+    } else {
+      setSelectedUsers([
+        ...selectedUsers.filter(user => user !== id)
+      ]);
     }
-
-    setSelectedUsers([]);
   };
 
   const handlePageChange = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
-    page: number
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
   ) => {
-    setPage(page);
+    setPage(newPage);
   };
 
   const handleRowsPerPageChange = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
-    setRowsPerPage(Number(event.target.value));
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
   };
 
   const address = (user: IUser) =>
     user.address &&
     `${user.address.city}, ${user.address.state}, ${user.address.country}`;
 
+
+    const selectMenu = () => {
+      return (
+        <div className={classes.root}>
+          <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="center"
+            spacing={2}>
+            <Grid item md={3}>
+              <Typography
+                variant="subtitle1"
+                color="textSecondary"
+                component="h6"
+              />
+              {`${selectedUsers.length} selected`}
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Grid container className={classes.selectedMenuActions} spacing={2}>
+                <Button startIcon={<DoneIcon />}>Enable Watch</Button>
+                <Button startIcon={<ClearIcon />}>Disable Watch</Button>
+                <Button startIcon={<DeleteOutlineIcon />}>
+                  Delete
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+        </div>
+      );
+    };
+
   return (
+    <>
     <Card {...rest} className={clsx(classes.root, className)}>
       <CardContent className={classes.content}>
         <PerfectScrollbar>
@@ -130,7 +175,13 @@ const UsersTable: React.FC<IProps> = ({ className, users, ...rest }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {users.slice(0, rowsPerPage).map(user => (
+                {(rowsPerPage > 0
+                  ? users.slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
+                  : users
+                ).map(user => (
                   <TableRow
                     className={classes.tableRow}
                     hover
@@ -162,6 +213,11 @@ const UsersTable: React.FC<IProps> = ({ className, users, ...rest }) => {
                     </TableCell>
                   </TableRow>
                 ))}
+                {page > 0 && emptyRows > 0 && (
+                  <TableRow style={{ height: 73 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
               </TableBody>
             </Table>
           </div>
@@ -175,10 +231,19 @@ const UsersTable: React.FC<IProps> = ({ className, users, ...rest }) => {
           onChangeRowsPerPage={handleRowsPerPageChange}
           page={page}
           rowsPerPage={rowsPerPage}
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
         />
       </CardActions>
     </Card>
+    <Drawer
+        elevation={1}
+        anchor="bottom"
+        open={openSelectMenu}
+        variant="persistent"
+        onClose={() => setOpenSelectMenu(false)}>
+        {selectMenu()}
+      </Drawer>
+    </>
   );
 };
 
